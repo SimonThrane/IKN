@@ -28,6 +28,10 @@ namespace tcp
 		private file_server ()
 		{
 			// TO DO Your own code
+			TcpListener serverSocket=new TcpListener(PORT);
+			serverSocket.Start ();
+			TcpClient clientSocket = default(TcpClient);
+			clientsocket= serverSocket.AcceptTcpClient ();
 		}
 
 		/// <summary>
