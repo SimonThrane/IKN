@@ -29,11 +29,11 @@ namespace tcp
 		private file_server ()
 		{
 			// TO DO Your own code
-			TcpListener serverSocket=new TcpListener(PORT);
+			TcpListener serverSocket=new TcpListener("10.0.0.1",PORT);
 			TcpClient clientSocket = default(TcpClient);
 			serverSocket.Start ();
 			Console.WriteLine(" >> Server Started");
-			clientsocket = serverSocket.AcceptTcpClient ();
+			clientSocket = serverSocket.AcceptTcpClient ();
 
 			while (true) {
 				try
@@ -52,7 +52,7 @@ namespace tcp
 				}
 				catch (Exception ex)
 				{
-					Console.WriteLine (ex.ToString);
+					Console.WriteLine (ex.ToString());
 				}
 				clientSocket.Close ();
 				serverSocket.Stop ();
