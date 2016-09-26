@@ -7,6 +7,7 @@ namespace tcp
 {
 	class file_server
 	{
+		const int FILESIZE = 1000;
 		/// <summary>
 		/// The PORT
 		/// </summary>
@@ -29,9 +30,34 @@ namespace tcp
 		{
 			// TO DO Your own code
 			TcpListener serverSocket=new TcpListener(PORT);
-			serverSocket.Start ();
 			TcpClient clientSocket = default(TcpClient);
-			clientsocket= serverSocket.AcceptTcpClient ();
+			serverSocket.Start ();
+			Console.WriteLine(" >> Server Started");
+			clientsocket = serverSocket.AcceptTcpClient ();
+
+			while (true) {
+				try
+				{
+					NetworkStream networkStream = new NetworkStream(clientSocket);
+					string dataFromClient = LIB.readTextTCP(networkStream);
+					Console.WriteLine(" >> Data from client - " + dataFromClient);
+					string fileFromClient = LIB.extractFileName(dataFromClient);
+					if(LIB.check_File_Exists(fileFromClient))
+					{
+						FileInfo fileInfo = new FileInfo(fileFromClient);
+						long fileSize = fileInfo.Length();
+						sendFile(fileFromClient,fileSize,networkStream);
+						networkStream.Flush();
+					}
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine (ex.ToString);
+				}
+				clientSocket.Close ();
+				serverSocket.Stop ();
+				} 
+
 		}
 
 		/// <summary>
@@ -49,6 +75,14 @@ namespace tcp
 		private void sendFile (String fileName, long fileSize, NetworkStream io)
 		{
 			// TO DO Your own code
+			int index = 0;
+			char[] buffer = new char[FILESIZE];
+			StreamReader streamReader = new StreamReader();
+			while (FILESIZE-1 < streamReader.ReadBlock (buffer, index, FILESIZE))
+			{
+				index += FILESIZE;
+				LIB.writeTextTCP (io, buffer);
+			}
 		}
 
 		/// <summary>

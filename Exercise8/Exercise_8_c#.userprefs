@@ -1,10 +1,11 @@
 ﻿<Properties StartupItem="file_server/file_server.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="LIB/lib.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="file_server/file_server.cs">
     <Files>
       <File FileName="LIB/lib.cs" Line="68" Column="30" />
-      <File FileName="file_server/file_server.cs" Line="14" Column="16" />
-      <File FileName="file_client/file_client.cs" Line="57" Column="1" />
+      <File FileName="file_server/file_server.cs" Line="4" Column="26" />
+      <File FileName="file_client/file_client.cs" Line="50" Column="42" />
+      <File FileName="file_server/AssemblyInfo.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
