@@ -24,7 +24,18 @@ namespace tcp
 		/// </param>
 		private file_client (string[] args)
 		{
-			// TO DO Your own code
+			long size;
+			Console.WriteLine ("Client started");
+			TcpClient clientSocket = new TcpClient ();
+			clientSocket.Connect (args[0], PORT);
+			NetworkStream serverStream = clientSocket.GetStream();
+			LIB.writeTextTCP (serverStream, args[1]); //Filename skal gives med som argument.
+			size = LIB.getFileSizeTCP(serverStream);
+			if(size!=0)
+				receiveFile(args[1],serverStream);
+
+			clientSocket.Close();
+
 		}
 
 		/// <summary>
@@ -38,7 +49,18 @@ namespace tcp
 		/// </param>
 		private void receiveFile (String fileName, NetworkStream io)
 		{
-			// TO DO Your own code
+			var file = File.Create (fileName);
+			int bytesRead;
+			// read the file in chunks of 1000Bytes
+			var buffer = new byte[1000];
+
+			while ((bytesRead=io.Read (buffer, 0, buffer.Length)) > 0) 
+				{
+					//io.Read(buffer,0,length);
+					file.Write (buffer, 0, bytesRead);
+
+				}
+			
 		}
 
 		/// <summary>
