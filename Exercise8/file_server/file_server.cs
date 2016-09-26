@@ -42,23 +42,23 @@ namespace tcp
 					NetworkStream networkStream = clientSocket.GetStream();
 					string dataFromClient = LIB.readTextTCP(networkStream);
 					Console.WriteLine(" >> Data from client - " + dataFromClient);
-					string fileFromClient = LIB.extractFileName(dataFromClient);
-					if(0!=LIB.check_File_Exists(fileFromClient))
+					FileInfo fileInfo = new FileInfo(dataFromClient);
+					long fileSize = fileInfo.Length;
+					LIB.writeTextTCP(networkStream,fileSize.ToString());
+					if(0!=LIB.check_File_Exists(dataFromClient))
 					{
-						FileInfo fileInfo = new FileInfo(fileFromClient);
-						long fileSize = fileInfo.Length;
-						sendFile(fileFromClient,fileSize,networkStream);
-						networkStream.Flush();
+						sendFile(dataFromClient,fileSize,networkStream);
 					}
+					networkStream.Flush();
 				}
 				catch (Exception ex)
 				{
 					Console.WriteLine (ex.ToString());
 				}
-				clientSocket.Close ();
-				serverSocket.Stop ();
-				} 
 
+				} 
+			clientSocket.Close ();
+			serverSocket.Stop ();
 		}
 
 		/// <summary>
@@ -76,15 +76,17 @@ namespace tcp
 		private void sendFile (String fileName, long fileSize, NetworkStream io)
 		{
 			// TO DO Your own code
-			int index = 0;
-			char[] buffer = new char[FILESIZE];
+
+			char[] buffer = new char[BUFSIZE];
 
 			StreamReader streamReader = new StreamReader (fileName);
-			while (FILESIZE-1 < streamReader.ReadBlock (buffer, index, FILESIZE))
-			{
-				index += FILESIZE;
-				LIB.writeTextTCP (io, new string(buffer));
-			}
+
+
+			for (int len = streamReader.Read(buffer,0,BUFSIZE); len != 0; len = streamReader.Read(buffer,0,BUFSIZE))
+				{
+					LIB.writeTextTCP (io, new string(buffer));
+				}
+					
 		}
 
 		/// <summary>
