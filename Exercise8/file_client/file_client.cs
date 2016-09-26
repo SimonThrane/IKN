@@ -49,8 +49,7 @@ namespace tcp
 		/// </param>
 		private void receiveFile (String fileName, NetworkStream io)
 		{
-			string fileString = LIB.readTextTCP (io);
-			File.WriteAllText (fileName, fileString);
+			File.WriteAllText (fileName, LIB.readTextTCP (io));
 
 			/*var file = File.Create (fileName);
 			int bytesRead;
