@@ -1,0 +1,3 @@
+/root/Desktop/IKN/Exercise8/file_server/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/root/Desktop/IKN/Exercise8/file_server/bin/Debug/LIB.dll
+/root/Desktop/IKN/Exercise8/file_server/bin/Debug/LIB.dll.mdb
