@@ -49,16 +49,8 @@ namespace tcp
 		/// </param>
 		private void receiveFile (String fileName, NetworkStream io)
 		{
-			
-			string fileString = LIB.readTextTCP (io);
 
-			var file = File.Create(fileName);
-
-			byte[] bytesRead = System.Text.ASCIIEncoding.Default.GetBytes(fileString);
-
-			file.Write (bytesRead, 0, 1000);
-
-/*			var file = File.Create (fileName);
+			var file = File.Create (fileName);
 			int bytesRead;
 			// read the file in chunks of 1000Bytes
 			var buffer = new byte[1000];
@@ -68,7 +60,7 @@ namespace tcp
 					//io.Read(buffer,0,length);
 					file.Write (buffer, 0, bytesRead);
 
-				}*/
+				}
 			
 		}
 
