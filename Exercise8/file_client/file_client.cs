@@ -52,14 +52,15 @@ namespace tcp
 
 			var file = File.Create (fileName);
 			int bytesRead;
+			int offset = 0;
 			// read the file in chunks of 1000Bytes
-			var buffer = new byte[1000];
+			var buffer = new byte[BUFSIZE];
 
 			while ((bytesRead=io.Read (buffer, 0, buffer.Length)) > 0) 
 				{
 					//io.Read(buffer,0,length);
-					file.Write (buffer, 0, bytesRead);
-
+					file.Write (buffer, offset, bytesRead);
+					offset += BUFSIZE;
 				}
 			
 		}
