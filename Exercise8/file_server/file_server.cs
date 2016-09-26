@@ -29,7 +29,8 @@ namespace tcp
 		private file_server ()
 		{
 			// TO DO Your own code
-			TcpListener serverSocket=new TcpListener("10.0.0.1",PORT);
+
+			TcpListener serverSocket=new TcpListener(new IPEndPoint(IPAddress.Any,PORT));
 			TcpClient clientSocket = default(TcpClient);
 			serverSocket.Start ();
 			Console.WriteLine(" >> Server Started");
@@ -38,14 +39,14 @@ namespace tcp
 			while (true) {
 				try
 				{
-					NetworkStream networkStream = new NetworkStream(clientSocket);
+					NetworkStream networkStream = clientSocket.GetStream();
 					string dataFromClient = LIB.readTextTCP(networkStream);
 					Console.WriteLine(" >> Data from client - " + dataFromClient);
 					string fileFromClient = LIB.extractFileName(dataFromClient);
-					if(LIB.check_File_Exists(fileFromClient))
+					if(0!=LIB.check_File_Exists(fileFromClient))
 					{
 						FileInfo fileInfo = new FileInfo(fileFromClient);
-						long fileSize = fileInfo.Length();
+						long fileSize = fileInfo.Length;
 						sendFile(fileFromClient,fileSize,networkStream);
 						networkStream.Flush();
 					}
@@ -77,11 +78,12 @@ namespace tcp
 			// TO DO Your own code
 			int index = 0;
 			char[] buffer = new char[FILESIZE];
-			StreamReader streamReader = new StreamReader();
+
+			StreamReader streamReader = new StreamReader (fileName);
 			while (FILESIZE-1 < streamReader.ReadBlock (buffer, index, FILESIZE))
 			{
 				index += FILESIZE;
-				LIB.writeTextTCP (io, buffer);
+				LIB.writeTextTCP (io, new string(buffer));
 			}
 		}
 
