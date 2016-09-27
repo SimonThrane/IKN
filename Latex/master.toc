@@ -4,4 +4,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Indledning}{2}{chapter.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}Konklusion}{3}{chapter.2}
+\contentsline {chapter}{\numberline {2}Udviklingsforl\IeC {\o }b}{3}{chapter.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}File-server}{3}{section.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.2}File-client}{3}{section.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Test af TCP-server og client}{4}{chapter.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Konklusion}{5}{chapter.4}
