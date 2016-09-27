@@ -49,23 +49,20 @@ namespace tcp
 		/// </param>
 		private void receiveFile (String fileName, NetworkStream io)
 		{
-			/*var buffer = new byte[BUFSIZE];
-			io.Read (buffer, 0, (int)LIB.getFileSizeTCP (io));
-
-			File.WriteAllBytes (fileName, buffer);*/
 
 			var file = File.Create (fileName);
 			int bytesRead;
-			int offset = 0;
+
 			// read the file in chunks of 1000Bytes
 			var buffer = new byte[BUFSIZE];
 
 			while ((bytesRead=io.Read (buffer, 0, buffer.Length)) > 0) 
 				{
-					//io.Read(buffer,0,length);
+					io.Read(buffer,0,BUFSIZE);
 					file.Write (buffer, 0, bytesRead);
-					offset += BUFSIZE;
 				}
+
+
 			
 		}
 
