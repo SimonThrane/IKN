@@ -49,7 +49,10 @@ namespace tcp
 		/// </param>
 		private void receiveFile (String fileName, NetworkStream io)
 		{
-			File.WriteAllText (fileName, LIB.readTextTCP (io));
+			var buffer = new byte[BUFSIZE];
+			io.Read (buffer, 0, (int)LIB.getFileSizeTCP (io));
+
+			File.WriteAllBytes (fileName, buffer);
 
 			/*var file = File.Create (fileName);
 			int bytesRead;
