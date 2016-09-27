@@ -56,13 +56,11 @@ namespace tcp
 			// read the file in chunks of 1000Bytes
 			var buffer = new byte[BUFSIZE];
 			int bytesRead = io.Read (buffer, 0, BUFSIZE);
-			var byteSum = bytesRead;
 
 			while (bytesRead > 0) 
 				{
-					file.Write (buffer, 0, byteSum);
+					file.Write (buffer, 0, bytesRead);
 					bytesRead = io.Read(buffer,0,BUFSIZE);
-					byteSum += bytesRead;
 				}
 
 
