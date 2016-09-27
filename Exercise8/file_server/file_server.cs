@@ -77,14 +77,14 @@ namespace tcp
 		{
 			// TO DO Your own code
 
-			char[] buffer = new char[BUFSIZE];
+			Byte[] buffer = new Byte[BUFSIZE];
 
-			StreamReader streamReader = new StreamReader (fileName);
+			var fileStream = new FileStream (fileName,FileMode.Open,FileAccess.Read);
 
 
-			for (int len = streamReader.Read(buffer,0,BUFSIZE); len != 0; len = streamReader.Read(buffer,0,BUFSIZE))
+			for (int len = fileStream.Read(buffer,0,BUFSIZE); len != 0; len = fileStream.Read(buffer,0,BUFSIZE))
 				{
-					LIB.writeTextTCP (io, new string(buffer));
+				io.Write (buffer, 0, BUFSIZE);
 				}
 					
 		}
