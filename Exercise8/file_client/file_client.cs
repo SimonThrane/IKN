@@ -51,15 +51,16 @@ namespace tcp
 		{
 
 			var file = File.Create (fileName);
-			int bytesRead;
+
 
 			// read the file in chunks of 1000Bytes
 			var buffer = new byte[BUFSIZE];
+			int bytesRead = io.Read (buffer, 0, BUFSIZE);
 
-			while ((bytesRead=io.Read (buffer, 0, buffer.Length)) > 0) 
+			while (bytesRead > 0) 
 				{
-					io.Read(buffer,0,BUFSIZE);
 					file.Write (buffer, 0, bytesRead);
+					bytesRead = io.Read(buffer,0,BUFSIZE);
 				}
 
 
