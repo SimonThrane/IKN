@@ -84,7 +84,7 @@ namespace tcp
 
 			for (int len = fileStream.Read(buffer,0,BUFSIZE); len != 0; len = fileStream.Read(buffer,0,BUFSIZE))
 				{
-				io.Write (buffer, 0, BUFSIZE);
+				io.Write (buffer, 0, len);
 				}
 					
 		}

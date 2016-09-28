@@ -59,13 +59,11 @@ namespace tcp
 
 			while (accumulatedBytes < fileSize) 
 				{
-				bytesRead = io.Read(buffer,0,BUFSIZE);
-				accumulatedBytes += bytesRead;
+					bytesRead = io.Read(buffer,0,BUFSIZE);
+					accumulatedBytes += bytesRead;
+
 					file.Write (buffer, 0, bytesRead);
 				}
-
-
-			
 		}
 
 		/// <summary>
