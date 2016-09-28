@@ -21,6 +21,9 @@ private file_client (string[] args)
 \end{verbatim}
 
 \noindent ReceiveFile (String fileName, NetworkStream io, long FileSize) 
+RecieveFile laver en fil med det pågældende filenavn, den har fået med som parameter. Den modtager også en networkstream, hvor dataene skal modtages fra, og så modtager den også størrelsen på filen som parameter.
+Metoden læser på networkstreamen og overfører dette til en buffer (Der bliver maksimalt aflæst 1000 bytes ad gangen). Når data er kommet ind i bufferen bliver de skrevet til den oprette fil. Denne proces fortsættes ind til, at der totalt er læst ligeså mange bytes som filesize.
+Man kan se koden for metoden nedenunder:
 
 \begin{verbatim}
 			private void receiveFile (String fileName, NetworkStream io, long fileSize)
