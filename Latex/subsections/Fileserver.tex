@@ -1,0 +1,9 @@
+I serveren blev, der implementeret en konstruktor og sendFile-metode.
+
+Konstruktoren er lavet, så den opretter en ny TCPListener, der lytter på en vilkårlig IP-adresse på en hard-coded Port.
+Derefter opretter den en . Serveren startes og venter på, at den opretter en TCP-connection med en client.
+Når forbindelsen med en client er oprettet den en networkstream til clientens socket. Serveren læser derefter, hvilken fil clienten ønsker overført. 
+Derefter tjekker serveren om den ønskede fil findes og sender dette resultat til clienten.
+Hvis filen findes sendes denne til clienten ved at kalde metoden sendFile.
+
+sendFile (String fileName, long fileSize, NetworkStream io) opretter et array af bytes med en faststørrelse for at overføre filen i stykker af 1000 bytes. 
