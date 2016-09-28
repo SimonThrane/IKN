@@ -12,4 +12,4 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Test af TCP-server og client}{5}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Konklusion}{6}{chapter.4}
+\contentsline {chapter}{\numberline {4}Konklusion}{7}{chapter.4}
