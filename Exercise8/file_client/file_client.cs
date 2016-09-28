@@ -31,8 +31,10 @@ namespace tcp
 			NetworkStream serverStream = clientSocket.GetStream();
 			LIB.writeTextTCP (serverStream, args[1]); //Filename skal gives med som argument.
 			size = LIB.getFileSizeTCP(serverStream);
-			if(size!= 0)
-				receiveFile(args[1],serverStream,size);
+			if (size != 0)
+				receiveFile (args [1], serverStream, size);
+			else
+				Console.WriteLine ("No such file exist on the server");
 
 			clientSocket.Close();
 
