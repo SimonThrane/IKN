@@ -1,0 +1,7 @@
+I clienten blev, der implementeret en konstruktor og recieveFile-metode.
+Konstrukturen tager to argumenter - et filnavn + stiangivelse og en ip-adresse til serveren.
+Det første, der sker i konstruktoren er, at der oprettes en ny TCPClient. Clienten forbinder derefter med en TCP-Server med den angivne IP-adresse og et hard-coded Portnummer.
+Clienten opretter derefter en networkstream, der skal tales med og sender en forespørgelse over at serveren skal sende den angivne fil til clienten. Clienten modtager derefter svar fra serveren om den angivne fil sendes på serveren. Hvis filens findes på serveren kalder clienten recieveFile og starter modtagelsen af filen.
+Efter filen er blevet overført lukker clienten forbindelsen til serveren.
+
+ReceiveFile (String fileName, NetworkStream io, long FileSize) 
