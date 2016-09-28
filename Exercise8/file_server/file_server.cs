@@ -28,17 +28,16 @@ namespace tcp
  		/// </summary>
 		private file_server ()
 		{
-			// TO DO Your own code
-
 			TcpListener serverSocket=new TcpListener(new IPEndPoint(IPAddress.Any,PORT));
 			TcpClient clientSocket = default(TcpClient);
 			serverSocket.Start ();
 			Console.WriteLine(" >> Server Started");
-			clientSocket = serverSocket.AcceptTcpClient ();
+
 
 			while (true) {
 				try
 				{
+					clientSocket = serverSocket.AcceptTcpClient ();
 					NetworkStream networkStream = clientSocket.GetStream();
 					string dataFromClient = LIB.readTextTCP(networkStream);
 					Console.WriteLine(" >> Data from client - " + dataFromClient);
