@@ -3,5 +3,39 @@ Konstrukturen tager to argumenter - et filnavn + stiangivelse og en ip-adresse t
 Det første, der sker i konstruktoren er, at der oprettes en ny TCPClient. Clienten forbinder derefter med en TCP-Server med den angivne IP-adresse og et hard-coded Portnummer.
 Clienten opretter derefter en networkstream, der skal tales med og sender en forespørgelse over at serveren skal sende den angivne fil til clienten. Clienten modtager derefter svar fra serveren om den angivne fil sendes på serveren. Hvis filens findes på serveren kalder clienten recieveFile og starter modtagelsen af filen.
 Efter filen er blevet overført lukker clienten forbindelsen til serveren.
+\begin{verbatim}
+private file_client (string[] args)
+{
+	long size;
+	Console.WriteLine ("Client started");
+	TcpClient clientSocket = new TcpClient ();
+	clientSocket.Connect (args[0], PORT);
+	NetworkStream serverStream = clientSocket.GetStream();
+	LIB.writeTextTCP (serverStream, args[1]); //Filename skal gives med som argument.
+	size = LIB.getFileSizeTCP(serverStream);
+	if(size!= 0)
+		receiveFile(args[1],serverStream,size);
 
-ReceiveFile (String fileName, NetworkStream io, long FileSize) 
+	clientSocket.Close();
+}
+\end{verbatim}
+
+\noindent ReceiveFile (String fileName, NetworkStream io, long FileSize) 
+
+\begin{verbatim}
+			private void receiveFile (String fileName, NetworkStream io, long fileSize)
+			{
+				var file = File.Create (fileName);
+				var buffer = new byte[BUFSIZE];
+				int bytesRead = 0;
+				long accumulatedBytes = 0;
+			
+				while (accumulatedBytes < fileSize) 
+				{
+					bytesRead = io.Read(buffer,0,BUFSIZE);
+					accumulatedBytes += bytesRead;
+			
+					file.Write (buffer, 0, bytesRead);
+				}
+			}
+\end{verbatim}
