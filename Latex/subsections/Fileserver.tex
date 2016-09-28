@@ -6,4 +6,5 @@ Når forbindelsen med en client er oprettet den en networkstream til clientens s
 Derefter tjekker serveren om den ønskede fil findes og sender dette resultat til clienten.
 Hvis filen findes sendes denne til clienten ved at kalde metoden sendFile.
 
-sendFile (String fileName, long fileSize, NetworkStream io) opretter et array af bytes med en faststørrelse for at overføre filen i stykker af 1000 bytes. 
+sendFile (String fileName, long fileSize, NetworkStream io) opretter et array af bytes med en faststørrelse for at overføre filen i stykker af 1000 bytes såfremt dette er muligt.
+Filen bliver læst ind ved brug af FileStream kommandoer og lagt i en variable, derefter overføres filen over networkStreamen i mindre stykker.
