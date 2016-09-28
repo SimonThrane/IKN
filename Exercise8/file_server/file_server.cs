@@ -41,13 +41,19 @@ namespace tcp
 					NetworkStream networkStream = clientSocket.GetStream();
 					string dataFromClient = LIB.readTextTCP(networkStream);
 					Console.WriteLine(" >> Data from client - " + dataFromClient);
+					if(LIB.check_File_Exists(dataFromClient)!=0)
+					{
 					FileInfo fileInfo = new FileInfo(dataFromClient);
 					long fileSize = fileInfo.Length;
 					LIB.writeTextTCP(networkStream,fileSize.ToString());
-					if(0!=LIB.check_File_Exists(dataFromClient))
-					{
+
 						sendFile(dataFromClient,fileSize,networkStream);
 					}
+					else
+					{
+						LIB.writeTextTCP(networkStream,""+0);
+					}
+				
 					networkStream.Flush();
 				}
 				catch (Exception ex)
