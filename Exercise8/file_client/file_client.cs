@@ -32,7 +32,7 @@ namespace tcp
 			LIB.writeTextTCP (serverStream, args[1]); //Filename skal gives med som argument.
 			size = LIB.getFileSizeTCP(serverStream);
 			if(size!= 0)
-				receiveFile(args[1],serverStream);
+				receiveFile(args[1],serverStream,size);
 
 			clientSocket.Close();
 
@@ -47,20 +47,21 @@ namespace tcp
 		/// <param name='io'>
 		/// Network stream for reading from the server
 		/// </param>
-		private void receiveFile (String fileName, NetworkStream io)
+		private void receiveFile (String fileName, NetworkStream io, long fileSize)
 		{
 
 			var file = File.Create (fileName);
 
 
-			// read the file in chunks of 1000Bytes
 			var buffer = new byte[BUFSIZE];
-			int bytesRead = io.Read (buffer, 0, BUFSIZE);
+			int bytesRead = 0;
+			long accumulatedBytes = 0;
 
-			while (bytesRead > 0) 
+			while (accumulatedBytes < fileSize) 
 				{
+				bytesRead = io.Read(buffer,0,BUFSIZE);
+				accumulatedBytes += bytesRead;
 					file.Write (buffer, 0, bytesRead);
-					bytesRead = io.Read(buffer,0,BUFSIZE);
 				}
 
 
