@@ -43,7 +43,7 @@ namespace UDP
          string returnData = Encoding.ASCII.GetString(receiveBytes);
 
          // Uses the IPEndPoint object to determine which of these two hosts responded.
-         Console.WriteLine("This is the message you received " +
+         Console.WriteLine("This is the message you received: \n" +
     	                              returnData.ToString());
          
 
