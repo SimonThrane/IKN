@@ -1,0 +1,5 @@
+/root/Desktop/IKN/Exercise_9/Exercise_9/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/root/Desktop/IKN/Exercise_9/Exercise_9/bin/Debug/Exercise_9.exe.mdb
+/root/Desktop/IKN/Exercise_9/Exercise_9/bin/Debug/Exercise_9.exe
+/root/Desktop/IKN/Exercise_9/Exercise_9/obj/x86/Debug/Exercise_9.exe
+/root/Desktop/IKN/Exercise_9/Exercise_9/obj/x86/Debug/Exercise_9.exe.mdb
