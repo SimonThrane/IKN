@@ -1,0 +1,24 @@
+%
+\input{setup/preamble.tex}% package inclusion and set up of the document
+\input{setup/hyphenations.tex}% 
+\input{setup/macros.tex}% my new macros
+
+
+
+
+\begin{document}
+%frontmatter
+\pagestyle{empty} %disable headers and footers
+\input{sections/frontpage.tex}
+\pdfbookmark[0]{Content}{label:content}
+\pagestyle{fancy} %enable headers and footers again
+\pagenumbering{arabic} %use arabic page numbering in the mainmatter
+\tableofcontents
+\input{sections/introduction.tex}
+\input{sections/Udviklingsforloeb.tex}
+\input{sections/test.tex}
+\input{sections/conclusion.tex}
+\printbibliography[heading=bibintoc]
+\label{bib:mybiblio}
+\appendix
+\end{document}

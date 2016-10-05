@@ -1,0 +1,50 @@
+I serveren blev, der implementeret en konstruktor og sendFile-metode. Samt indsat en del API funktioner. 
+Konstruktoren er lavet, så den opretter en ny TCPListener, der lytter på en vilkårlig IP-adresse på en hard-coded Port.
+Nu sættes serveren til at oprette en TCP-connection med en client.
+\begin{verbatim}
+while (true) {
+try
+{
+clientSocket = serverSocket.AcceptTcpClient ();
+NetworkStream networkStream = clientSocket.GetStream();
+string dataFromClient = LIB.readTextTCP(networkStream);
+Console.WriteLine(" >> Data from client - " + dataFromClient);
+FileInfo fileInfo = new FileInfo(dataFromClient);
+long fileSize = fileInfo.Length;
+LIB.writeTextTCP(networkStream,fileSize.ToString());
+if(0!=LIB.check_File_Exists(dataFromClient))
+{
+sendFile(dataFromClient,fileSize,networkStream);
+}
+networkStream.Flush();
+}
+\end{verbatim}
+
+På koden ovenfor kan ses at når forbindelsen med en client oprettes der en networkstream til clientens socket. Serveren læser derefter, hvilken fil clienten ønsker overført. 
+Derefter tjekker serveren om den ønskede fil findes og sender dette resultat til clienten.
+Hvis filen findes sendes denne til clienten ved at kalde metoden sendFile.
+
+sendFile (String fileName, long fileSize, NetworkStream io) opretter et array af bytes med en fast størrelse for at overføre filen i stykker af maksimalt 1000 bytes såfremt dette er muligt. Kode segmentet kan ses nedenfor.
+
+\begin{verbatim}
+private void sendFile (String fileName, long fileSize, NetworkStream io)
+{
+Byte[] buffer = new Byte[BUFSIZE];
+
+var fileStream = new FileStream (fileName,FileMode.Open,FileAccess.Read);
+
+
+for (int len = fileStream.Read(buffer,0,BUFSIZE); len != 0; len =
+fileStream.Read(buffer,0,BUFSIZE))
+{
+io.Write (buffer, 0, len);
+}
+
+}
+\end{verbatim}
+Filen bliver læst ind ved brug af FileStream kommandoer og lagt i en variable, derefter overføres filen over networkStreamen i mindre stykker.
+
+I selve io.Write() metoden kan det ses at 'len' er antallet af bytes der rent faktisk er indlæst af filestreamen, så selvom det forsøges at læse 1000 bytes, vil metoden kun skrive det antal bytes der faktisk er indlæst i bufferen, og derfor skrives ikke 1000, men maksimalt 1000 bytes.
+
+
+Når hele overførslen fra serveren er overstået, sættes serveren til igen at lytte efter nye TCP forbindelser. Dette kan ses i det første kodesegment i afsnittet. På denne måde er serveren gjort iterativ.
