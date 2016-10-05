@@ -1,5 +1,0 @@
-/root/Desktop/IKN/Exercise_9/file_client/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
-/root/Desktop/IKN/Exercise_9/file_client/bin/Debug/file_client.exe.mdb
-/root/Desktop/IKN/Exercise_9/file_client/bin/Debug/file_client.exe
-/root/Desktop/IKN/Exercise_9/file_client/obj/x86/Debug/file_client.exe
-/root/Desktop/IKN/Exercise_9/file_client/obj/x86/Debug/file_client.exe.mdb
