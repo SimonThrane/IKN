@@ -27,10 +27,10 @@ namespace UDP
 			UdpClient udpClient = new UdpClient(PORT);
 			
 			 try{
-         udpClient.Connect(10.0.0.1, PORT);
+         udpClient.Connect(args[0], PORT);
 
          // Sends a message to the host to which you have connected.
-         Byte[] sendBytes = Encoding.ASCII.GetBytes(args[0]);
+         Byte[] sendBytes = Encoding.ASCII.GetBytes(args[1]);
 
          udpClient.Send(sendBytes, sendBytes.Length);
 
