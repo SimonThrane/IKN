@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 
-namespace tcp
+namespace UDP
 {
 	class file_client
 	{
@@ -24,19 +24,36 @@ namespace tcp
 		/// </param>
 		private file_client (string[] args)
 		{
-			long size;
-			Console.WriteLine ("Client started");
-			TcpClient clientSocket = new TcpClient ();
-			clientSocket.Connect (args[0], PORT);
-			NetworkStream serverStream = clientSocket.GetStream();
-			LIB.writeTextTCP (serverStream, args[1]); //Filename skal gives med som argument.
-			size = LIB.getFileSizeTCP(serverStream);
-			if (size != 0)
-				receiveFile (args [1], serverStream, size);
-			else
-				Console.WriteLine ("No such file exist on the server");
+			UdpClient udpClient = new UdpClient(PORT);
+			
+			 try{
+         udpClient.Connect(10.0.0.1, PORT);
 
-			clientSocket.Close();
+         // Sends a message to the host to which you have connected.
+         Byte[] sendBytes = Encoding.ASCII.GetBytes(args[0]);
+
+         udpClient.Send(sendBytes, sendBytes.Length);
+
+        
+         //IPEndPoint object will allow us to read datagrams sent from any source.
+         IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, PORT);
+
+         // Blocks until a message returns on this socket from a remote host.
+         Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint); 
+         string returnData = Encoding.ASCII.GetString(receiveBytes);
+
+         // Uses the IPEndPoint object to determine which of these two hosts responded.
+         Console.WriteLine("This is the message you received " +
+    	                              returnData.ToString());
+         
+
+          udpClient.Close();
+        
+
+          }  
+       catch (Exception e ) {
+                  Console.WriteLine(e.ToString());
+        }
 
 		}
 
@@ -49,24 +66,7 @@ namespace tcp
 		/// <param name='io'>
 		/// Network stream for reading from the server
 		/// </param>
-		private void receiveFile (String fileName, NetworkStream io, long fileSize)
-		{
-
-			var file = File.Create (fileName);
-
-
-			var buffer = new byte[BUFSIZE];
-			int bytesRead = 0;
-			long accumulatedBytes = 0;
-
-			while (accumulatedBytes < fileSize) 
-				{
-					bytesRead = io.Read(buffer,0,BUFSIZE);
-					accumulatedBytes += bytesRead;
-
-					file.Write (buffer, 0, bytesRead);
-				}
-		}
+		
 
 		/// <summary>
 		/// The entry point of the program, where the program control starts and ends.
