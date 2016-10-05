@@ -4,7 +4,7 @@ using System.Net;
 using System.Text;
 using System.Net.Sockets;
 
-namespace tcp
+namespace udp
 {
 	class file_server
 	{
@@ -19,7 +19,7 @@ namespace tcp
 				IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any,PORT);
 				Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint);
 				string recievedString = Encoding.ASCII.GetString(receiveBytes);
-
+				udpClient.Connect (RemoteIpEndPoint);
 				switch (recievedString.ToLower()) {
 				case "l":
 					udpClient.Send(ReadFile("/proc/loadavg"), ReadFile("/proc/loadavg").Length);
@@ -37,10 +37,12 @@ namespace tcp
 		}
 		private byte[] ReadFile(string path)
 			{
-				var fileStream = new FileStream(path,FileMode.Open,FileAccess.Read);
-				byte[] buffer = new byte[fileStream.Length];
-				fileStream.Read (buffer, 0, buffer.Length);
+			using(var streamReader = new StreamReader (path))
+			{
+				string fileContent = streamReader.ReadToEnd ();
+				Byte[] buffer = Encoding.ASCII.GetBytes(fileContent);
 				return buffer;
+			}
 			}
 
 		/// <summary>

@@ -4,7 +4,7 @@ using System.Net;
 using System.Text;
 using System.Net.Sockets;
 
-namespace UDP
+namespace udp
 {
 	class file_client
 	{
