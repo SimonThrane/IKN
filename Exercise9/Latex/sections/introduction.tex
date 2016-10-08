@@ -1,7 +1,12 @@
 \chapter{Indledning}\label{ch:introduction}
-Denne opgave ophandler uarbejdning og test af en TCP-server og TCP-Client. 
+Denne opgave ophandler uarbejdning og test af en UDP-server og UDP-Client. 
 
-Serveren skal køre i en virtuel Linux-maskine og kunne supportere en client ad gangen. Serveren skal modtage en tesktstreng fra clienten. Tekststrengen skal indeholde et filnavn, eventuel ledsaget af en stiangivelse. Tilsammen skal informationen i tekststrengen udpege en fil af en vilkårlig type/størrelse i serveren, som en tilsluttet client ønsker at hente fra serveren. Hvis filen ikke findes skal serveren returnere en fejlmelding til client’en. Hvis filen findes skal den overføres fra server til client i segmenter på 1000 bytes ad gangen –indtil filen er overført fuldstændigt. Serverens portnummer skal være 9000 hardcoded ind. 
-Serveren skal desuden være iterativ og derfor være klar til at supportere en anden client efter en endt filoverførelse, men er dog enkelt trådet og kan derfor kun klare en af gangen.
+Serveren skal køre i en virtuel Linux-maskine og kunne supportere en client ad gangen. Serveren skal modtage en tesktstreng/tegn fra clienten. Tekststrengen skal indeholde enten 'L','l', 'U' eller 'u'. Hvis serveren modtager et ”U” skal informationen i filen /proc/uptime
+returneres til clienten. 
+Hvis serveren modtager et ”L” skal informationen i filen /proc/loadavg returneres til clienten.
+Serverens portnummer skal være 9000 hardcoded ind. 
+Serveren skal desuden være iterativ og derfor være klar til at supportere en anden client efter en endt overførelse, men er dog enkelt trådet og kan derfor kun klare en af gangen.
 
-Clienten skal køre i en anden virtuel Linux-maskine. Denne client skal kunne hente en fil fra den ovenfor beskrevne server. Client’en sender indledningsvis en tekststreng, som er indtastet af operatøren, til serveren. Tekststrengen skal indeholde et filnavn + en eventuel stiangivelse til en fil i serveren. Client’en skal modtage den ønskede fil fejlfrit fra serveren – eller udskrive en fejlmelding hvis filen ikke findes i serveren.
+Clienten skal køre i en anden virtuel Linux-maskine. Denne client skal kunne sende et kommando i form af et 
+bogstav ”U”, ”u”, ”L”, ”l” som indtastes af operatøren
+til UDP-serveren. Når svaret fra UDP-serveren modtages, udskrives dette svar til UDP-client’s bruger via terminalen.  
