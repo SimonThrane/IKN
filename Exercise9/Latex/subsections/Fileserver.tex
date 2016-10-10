@@ -1,11 +1,11 @@
-Der er blevet implementeret en UDP server. Denne server lytter på en fast port (9000) og generelt bruger bruges bibliotek funktionerne fra System.Net.Sockets meget i denne implementering. Først og fremmest startes serveren og en udp client oprettes så der kan lyttes på port 9000. Der er her ikke tale om en reel klient men blot en UDP instans.
+Der er blevet implementeret en UDP server. Denne server lytter på en fast port (9000) og generelt bruges bibliotek funktionerne fra System.Net.Sockets meget i denne implementering. Først og fremmest startes serveren og en udp client instans fra biblioteket oprettes så der kan lyttes på port 9000. Der er her ikke tale om en reel klient men blot en UDP instans.
 
 \begin{verbatim}
 Console.WriteLine(" >> Server Started");
 UdpClient udpClient = new UdpClient(PORT);
 \end{verbatim}
 
-\noindent Nu er serveren initializeret så det der sker herefter ligger alt sammen i en uendelig løkke. Derefter sættes der et endpoint som gør at der kan recieves fra det den client der bliver fundet. Endpointet lytter på port 9000 efter enhver IP-adresse. Derefter bliver det modtagne data lavet til en tekst streng, istedet for et bytearray.  
+\noindent Nu er serveren initializeret og herefter ligger alt funktionalitet i en uendelig løkke. Derefter sættes der et endpoint så der kan recieves fra det den client der bliver fundet. Endpointet lytter på port 9000 efter enhver IP-adresse. Det modtagne data bliver lavet til en tekst streng, istedet for et bytearray.  
 
 \begin{verbatim}
 IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any,PORT);
@@ -13,7 +13,7 @@ Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint);
 string recievedString = Encoding.ASCII.GetString(receiveBytes);
 \end{verbatim}
 
-\noindent Derefter sættes instansen af UDP til at connecte til det endpoint der er blevet modtaget fra, og afhængigt af om der modtages 'l' og 'u', sendes der enten data fra serverens /proc/loadavg eller /proc/uptime. Der er brugt ToLower() metoden, så der ikke er case sensitivity. Serveren sender også tilbage hvis den modtager noget andet, at den ikke forstår kommandoen.
+\noindent Instansen af UDP connectes til det endpoint der er blevet modtaget fra, og afhængigt af om der modtages 'l' og 'u', sendes der enten data fra serverens /proc/loadavg eller /proc/uptime. Der er brugt ToLower() metoden, så der ikke er case sensitivity. Serveren svarer også hvis den modtager noget andet.
 
 \begin{verbatim}
 udpClient.Connect (RemoteIpEndPoint);
@@ -30,7 +30,7 @@ switch (recievedString.ToLower()) {
 	break;
 \end{verbatim}
 
-\noindent Der er blevet implementeret en hjælpemetode ReadFile() som bruges til at hente dataen fra de nævnte filer.
+\noindent Der er blevet implementeret en hjælpemetode ReadFile() som bruges til at hente dataen fra de nævnte filer og lave dem til byte arrays der kan sendes.
 
 \begin{verbatim}
 private byte[] ReadFile(string path)
@@ -44,7 +44,7 @@ return buffer;
 }
 \end{verbatim}
 
-\noindent Som tidligere nævnt virker serveren iterativt fordi den lytter på enhver port og begynder at lytte igen efter hver client interaktion. Desuden lukkes serveren efter den uendelige løkke, af almindelig god skik.
+\noindent Serveren virker iterativt fordi den lytter på enhver port og begynder at lytte igen efter hver client interaktion. Desuden lukkes serveren efter den uendelige løkke, af almindelig god skik.
 
 
 %I serveren blev, der implementeret en konstruktor og sendFile-metode. Samt indsat en del API funktioner. 
