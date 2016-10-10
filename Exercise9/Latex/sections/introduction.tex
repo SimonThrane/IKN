@@ -1,12 +1,12 @@
 \chapter{Indledning}\label{ch:introduction}
-Denne opgave ophandler uarbejdning og test af en UDP-server og UDP-Client. 
+Denne opgave ophandler udarbejdning og test af en UDP-server og UDP-Client. 
 
-Serveren skal køre i en virtuel Linux-maskine og kunne supportere en client ad gangen. Serveren skal modtage en tesktstreng/tegn fra clienten. Tekststrengen skal indeholde enten 'L','l', 'U' eller 'u'. Hvis serveren modtager et ”U” skal informationen i filen /proc/uptime
+\noindent Serveren skal køre i en virtuel Linux-maskine og kunne supportere en client ad gangen. Serveren skal modtage en tesktstreng/tegn fra clienten. Tekststrengen skal indeholde enten 'L','l', 'U' eller 'u'. Hvis serveren modtager et ”U” skal informationen i filen /proc/uptime
 returneres til clienten. 
 Hvis serveren modtager et ”L” skal informationen i filen /proc/loadavg returneres til clienten.
 Serverens portnummer skal være 9000 hardcoded ind. 
 Serveren skal desuden være iterativ og derfor være klar til at supportere en anden client efter en endt overførelse, men er dog enkelt trådet og kan derfor kun klare en af gangen.
 
-Clienten skal køre i en anden virtuel Linux-maskine. Denne client skal kunne sende et kommando i form af et 
+\noindent Clienten skal køre i en anden virtuel Linux-maskine. Denne client skal kunne sende et kommando i form af et 
 bogstav ”U”, ”u”, ”L”, ”l” som indtastes af operatøren
-til UDP-serveren. Når svaret fra UDP-serveren modtages, udskrives dette svar til UDP-client’s bruger via terminalen.  
+til UDP-serveren. Når svaret fra UDP-serveren modtages, udskrives dette svar til UDP-client’s bruger via terminalen. Det skal i øvrigt kunne håndteres at der sendes andet end de ovennævnte.  
