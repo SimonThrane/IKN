@@ -13,7 +13,7 @@ Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint);
 string recievedString = Encoding.ASCII.GetString(receiveBytes);
 \end{verbatim}
 
-\noindent Derefter sættes instansen af UDP til at connecte til det endpoint der er blevet modtaget fra, og afhængigt af om der modtages 'l' og 'u', sendes der enten data fra serverens /proc/loadavg eller /proc/uptime. 
+\noindent Derefter sættes instansen af UDP til at connecte til det endpoint der er blevet modtaget fra, og afhængigt af om der modtages 'l' og 'u', sendes der enten data fra serverens /proc/loadavg eller /proc/uptime. Der er brugt ToLower() metoden, så der ikke er case sensitivity.
 
 \begin{verbatim}
 udpClient.Connect (RemoteIpEndPoint);
