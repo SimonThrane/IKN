@@ -69,7 +69,7 @@ namespace Linklaget
 						}
 					else{
 					buffer [j++] = buf [i];
-						}
+				}
 			}
 
 			buffer[0]=Convert.ToByte('A');
