@@ -1,0 +1,11 @@
+/root/Desktop/IKN/Exercise13/Exercise_13_c#/file_client/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/root/Desktop/IKN/Exercise13/Exercise_13_c#/file_client/bin/Debug/file_client.exe.mdb
+/root/Desktop/IKN/Exercise13/Exercise_13_c#/file_client/bin/Debug/file_client.exe
+/root/Desktop/IKN/Exercise13/Exercise_13_c#/file_client/obj/x86/Debug/file_client.exe
+/root/Desktop/IKN/Exercise13/Exercise_13_c#/file_client/obj/x86/Debug/file_client.exe.mdb
+/root/Desktop/IKN/Exercise13/Exercise_13_c#/file_client/bin/Debug/LIB.dll
+/root/Desktop/IKN/Exercise13/Exercise_13_c#/file_client/bin/Debug/LIB.dll.mdb
+/root/Desktop/IKN/Exercise13/Exercise_13_c#/file_client/bin/Debug/Transport.dll
+/root/Desktop/IKN/Exercise13/Exercise_13_c#/file_client/bin/Debug/Transport.dll.mdb
+/root/Desktop/IKN/Exercise13/Exercise_13_c#/file_client/bin/Debug/Link.dll
+/root/Desktop/IKN/Exercise13/Exercise_13_c#/file_client/bin/Debug/Link.dll.mdb

@@ -50,10 +50,32 @@ namespace Linklaget
 		/// </param>
 		/// <param name='size'>
 		/// Size.
-		/// </param>
+		/// </param>s
 		public void send (byte[] buf, int size)
 		{
-	    	// TO DO Your own code
+			int j=1;
+			for (int i = 0; i < size; i++) {
+				if(buf[i].Equals('A'))
+					{
+					buffer[j++]=Convert.ToByte('B');
+					buffer[j++]=Convert.ToByte('C');
+						
+					}
+				else if(buf[i].Equals('B'))
+						{
+					buffer[j++]=Convert.ToByte('B');
+					buffer[j++]=Convert.ToByte('D');
+							
+						}
+					else{
+					buffer [j++] = buf [i];
+						}
+			}
+
+			buffer[0]=Convert.ToByte('A');
+			buffer[buffer.Length]=Convert.ToByte('A');
+			serialPort.Write (buffer, 0, buffer.Length);
+
 		}
 
 		/// <summary>
@@ -67,7 +89,31 @@ namespace Linklaget
 		/// </param>
 		public int receive (ref byte[] buf)
 		{
-	    	// TO DO Your own code
+			while ((char) serialPort.ReadByte () != 'A') {}
+			int i = 0;
+			while ((buffer[i++]= (byte) serialPort.ReadByte () )!= (byte)'A') {}
+
+			i--;
+			int f = 0;
+
+			for(int j =0; j<i; j++)
+			{
+				if(buffer[j].Equals('B'))
+					{
+						j++;
+						if (buffer [j].Equals ('C'))
+							buf [f++] = Convert.ToByte ('A');
+						if(buffer[j].Equals('D'))
+							buf [f++] = Convert.ToByte ('B');
+					}
+					else
+					{
+						buf [f++] = buffer [j];
+					}
+			}
+
+			return buf.Length;
+						
 		}
 	}
 }
