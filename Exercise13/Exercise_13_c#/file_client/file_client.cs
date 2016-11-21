@@ -32,7 +32,7 @@ namespace Application
 			long size;
 			Console.WriteLine ("Client started");
 			Transport clientSocket = new Transport (BUFSIZE);
-			clientSocket.send (Encoding.ASCII.GetBytes (args [0]));
+			clientSocket.send (Encoding.ASCII.GetBytes (args [0]),Encoding.ASCII.GetBytes (args [0]).Length);
 
 
 
@@ -47,7 +47,7 @@ namespace Application
 		/// <param name='io'>
 		/// Network stream for reading from the server
 		/// </param>
-		private void receiveFile (String fileName, NetworkStream io, long fileSize)
+		/*private void receiveFile (String fileName, NetworkStream io, long fileSize)
 		{
 
 			var file = File.Create (fileName);
@@ -64,7 +64,7 @@ namespace Application
 
 				file.Write (buffer, 0, bytesRead);
 			}
-		}
+		}*/
 
 		/// <summary>
 		/// The entry point of the program, where the program control starts and ends.

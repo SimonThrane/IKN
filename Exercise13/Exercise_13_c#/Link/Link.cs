@@ -55,13 +55,13 @@ namespace Linklaget
 		{
 			int j=1;
 			for (int i = 0; i < size; i++) {
-				if(buf[i].Equals('A'))
+				if(buf[i] == (byte)('A'))
 					{
 					buffer[j++]=Convert.ToByte('B');
 					buffer[j++]=Convert.ToByte('C');
 						
 					}
-				else if(buf[i].Equals('B'))
+				else if(buf[i] == (byte)('B'))
 						{
 					buffer[j++]=Convert.ToByte('B');
 					buffer[j++]=Convert.ToByte('D');
@@ -73,8 +73,8 @@ namespace Linklaget
 			}
 
 			buffer[0]=Convert.ToByte('A');
-			buffer[buffer.Length]=Convert.ToByte('A');
-			serialPort.Write (buffer, 0, buffer.Length);
+			buffer[j++]=Convert.ToByte('A');
+			serialPort.Write (buffer, 0, j);
 
 		}
 
