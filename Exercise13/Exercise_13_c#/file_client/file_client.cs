@@ -12,9 +12,7 @@ namespace Application
 		/// The BUFSIZE.
 		/// </summary>
 		const int BUFSIZE = 1000;
-
-		const int PORT = 9000;
-
+		private byte[] buffer;
 		/// <summary>
 		/// Initializes a new instance of the <see cref="file_client"/> class.
 		/// 
@@ -29,13 +27,12 @@ namespace Application
 		/// </param>
 		private file_client (string[] args)
 		{
-			long size;
+			buffer = new byte[BUFSIZE];
 			Console.WriteLine ("Client started");
 			Transport clientSocket = new Transport (BUFSIZE);
 			clientSocket.send (Encoding.ASCII.GetBytes (args [0]),Encoding.ASCII.GetBytes (args [0]).Length);
 
-
-
+			receiveFile (args [0], clientSocket);
 		}
 
 		/// <summary>
@@ -47,24 +44,23 @@ namespace Application
 		/// <param name='io'>
 		/// Network stream for reading from the server
 		/// </param>
-		/*private void receiveFile (String fileName, NetworkStream io, long fileSize)
+		private void receiveFile (string fileName, Transport transport)
 		{
-
-			var file = File.Create (fileName);
-
-
-			var buffer = new byte[BUFSIZE];
 			int bytesRead = 0;
 			long accumulatedBytes = 0;
+			int size=transport.receive (ref buffer);
+			long fileSize = BitConverter.ToInt64(buffer,0);
+			if ( fileSize> 0) {
+				var file = File.Create (fileName);
 
-			while (accumulatedBytes < fileSize) 
-			{
-				bytesRead = io.Read(buffer,0,BUFSIZE);
-				accumulatedBytes += bytesRead;
+				while (accumulatedBytes < fileSize) {
+					bytesRead = transport.receive(ref buffer);
+					accumulatedBytes += bytesRead;
 
-				file.Write (buffer, 0, bytesRead);
+					file.Write (buffer, 0, bytesRead);
+				}
 			}
-		}*/
+		}
 
 		/// <summary>
 		/// The entry point of the program, where the program control starts and ends.

@@ -22,9 +22,18 @@ namespace Application
 		{
 			byte[] buf = new byte[BUFSIZE];
 			Transport = new Transport (BUFSIZE);
+			byte[] noFile = Encoding.ASCII.GetBytes ("File does not exist");
+
 			while (true) {
 				Transport.receive (ref buf);
-				Console.WriteLine("Modtaget: " + System.Text.Encoding.Default.GetString(buf));
+				string filename = LIB.extractFileName (System.Text.Encoding.Default.GetString (buf));
+				long size=(LIB.check_File_Exists(filename));
+				if (size > 0)
+					sendFile (filename, size, Transport);
+				else {
+					Console.WriteLine ("File does not exist");
+					sendFile (filename, size, Transport);
+				}
 			}
 		
 		}
@@ -43,7 +52,17 @@ namespace Application
 		/// </param>
 		private void sendFile(String fileName, long fileSize, Transport transport)
 		{
-			// TO DO Your own code
+			Byte[] buffer = new Byte[BUFSIZE];
+
+			transport.send (BitConverter.GetBytes (fileSize), BitConverter.GetBytes (fileSize).Length);
+
+			var fileStream = new FileStream (fileName,FileMode.Open,FileAccess.Read);
+
+
+			for (int len = fileStream.Read(buffer,0,BUFSIZE); len != 0; len = fileStream.Read(buffer,0,BUFSIZE))
+			{
+				transport.send(buffer, len);
+			}
 		}
 
 		/// <summary>
@@ -54,6 +73,7 @@ namespace Application
 		/// </param>
 		public static void Main (string[] args)
 		{
+			Console.WriteLine ("Server starts...");
 			new file_server();
 		}
 	}
