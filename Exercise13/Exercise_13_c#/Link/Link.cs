@@ -98,12 +98,12 @@ namespace Linklaget
 
 			for(int j =0; j<i; j++)
 			{
-				if(buffer[j].Equals('B'))
+				if(buffer[j]==(byte)('B'))
 					{
 						j++;
-						if (buffer [j].Equals ('C'))
+					if (buffer [j]==(byte)('C'))
 							buf [f++] = Convert.ToByte ('A');
-						if(buffer[j].Equals('D'))
+					if(buffer[j]==(byte)('D'))
 							buf [f++] = Convert.ToByte ('B');
 					}
 					else
