@@ -33,6 +33,8 @@ namespace Application
 			clientSocket.send (Encoding.ASCII.GetBytes (args [0]),Encoding.ASCII.GetBytes (args [0]).Length);
 			clientSocket.receive (ref buffer);
 			Console.WriteLine (Encoding.ASCII.GetString (buffer));
+			clientSocket.receive (ref buffer);
+			Console.WriteLine (Encoding.ASCII.GetString (buffer));
 			/*receiveFile (args [0], clientSocket);*/
 		}
 
