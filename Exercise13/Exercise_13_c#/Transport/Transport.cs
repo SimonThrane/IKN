@@ -105,7 +105,7 @@ namespace Transportlaget
 				buffer [(int)TransCHKSUM.SEQNO] = (byte)seqNo;
 				buffer[(int)TransCHKSUM.TYPE] = (byte)(int)TransType.DATA;
 				Array.Copy(buf,0,buffer, 4, buf.Length);
-				checksum.calcChecksum(ref buffer,size);
+				checksum.calcChecksum(ref buffer,size+4);
 
 			do {
 				link.send (buffer, buffer.Length);
@@ -120,13 +120,15 @@ namespace Transportlaget
 		/// </param>
 		public int receive (ref byte[] buf)
 		{
-			int size=link.receive(ref buffer);
-			sendAck(checksum.checkChecksum (buffer, size));
+			bool ack;
+			int size;
+			do {
+				size = link.receive (ref buffer);
+				ack=(checksum.checkChecksum (buffer, size));
+				sendAck(ack);
+			} while(!ack);
 
-			if (checksum.checkChecksum (buffer, size)) {
-				Array.Copy (buffer, 4, buf, 0, buffer.Length-4);
-			}
-
+			Array.Copy (buffer, 4, buf, 0, size-4);
 			return buf.Length;
 		}
 	}

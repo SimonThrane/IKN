@@ -13,12 +13,20 @@ namespace Application
 		/// </summary>
 		private const int BUFSIZE = 1000;
 
+		private Transport Transport;
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="file_server"/> class.
 		/// </summary>
 		private file_server ()
 		{
-			// TO DO Your own code
+			byte[] buf = new byte[BUFSIZE];
+			Transport = new Transport (BUFSIZE);
+			while (true) {
+				Transport.receive (ref buf);
+				Console.WriteLine("Modtaget: " + System.Text.Encoding.Default.GetString(buf));
+			}
+		
 		}
 
 		/// <summary>
