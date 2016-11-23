@@ -31,8 +31,9 @@ namespace Application
 			Console.WriteLine ("Client started");
 			Transport clientSocket = new Transport (BUFSIZE);
 			clientSocket.send (Encoding.ASCII.GetBytes (args [0]),Encoding.ASCII.GetBytes (args [0]).Length);
-
-			receiveFile (args [0], clientSocket);
+			clientSocket.receive (ref buffer);
+			Console.WriteLine (Encoding.ASCII.GetString (buffer));
+			/*receiveFile (args [0], clientSocket);*/
 		}
 
 		/// <summary>

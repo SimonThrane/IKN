@@ -28,12 +28,13 @@ namespace Application
 				Transport.receive (ref buf);
 				string filename = LIB.extractFileName (System.Text.Encoding.Default.GetString (buf));
 				long size=(LIB.check_File_Exists(filename));
-				if (size > 0)
+				Transport.send (Encoding.ASCII.GetBytes (filename), Encoding.ASCII.GetBytes(filename).Length);
+				/*if (size > 0)
 					sendFile (filename, size, Transport);
 				else {
 					Console.WriteLine ("File does not exist");
 					sendFile (filename, size, Transport);
-				}
+				}*/
 			}
 		
 		}
