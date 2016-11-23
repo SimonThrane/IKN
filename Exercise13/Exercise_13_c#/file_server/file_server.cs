@@ -26,8 +26,8 @@ namespace Application
 
 			while (true) {
 				Transport.receive (ref buf);
-				string filename = LIB.extractFileName (System.Text.Encoding.Default.GetString (buf));
-				long size=(LIB.check_File_Exists(System.Text.Encoding.Default.GetString (buf)));
+				string filename = System.Text.Encoding.Default.GetString (buf);
+				long size=(LIB.check_File_Exists(filename));
 				Transport.send (Encoding.ASCII.GetBytes (filename), Encoding.ASCII.GetBytes (filename).Length);
 
 				Transport.send (BitConverter.GetBytes (size), BitConverter.GetBytes(size).Length);
