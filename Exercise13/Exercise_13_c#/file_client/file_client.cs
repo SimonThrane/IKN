@@ -27,15 +27,18 @@ namespace Application
 		/// </param>
 		private file_client (string[] args)
 		{
+			int bytelength;
 			buffer = new byte[BUFSIZE];
 			Console.WriteLine ("Client started");
 			Transport clientSocket = new Transport (BUFSIZE);
 			clientSocket.send (Encoding.ASCII.GetBytes (args [0]),Encoding.ASCII.GetBytes (args [0]).Length);
 			Console.WriteLine (Encoding.ASCII.GetBytes (args [0]).Length.ToString());
-			clientSocket.receive (ref buffer);
-			Console.WriteLine (Encoding.ASCII.GetString (buffer));
-			clientSocket.receive (ref buffer);
-			Console.WriteLine (Encoding.ASCII.GetString (buffer));
+			//Filename
+			bytelength=clientSocket.receive (ref buffer);
+			Console.WriteLine (Encoding.ASCII.GetString (buffer).Substring(0,bytelength));
+			//Filesize
+			bytelength = clientSocket.receive (ref buffer);
+			Console.WriteLine (Encoding.ASCII.GetString (buffer).Substring(0,bytelength));
 			/*receiveFile (args [0], clientSocket);*/
 		}
 
