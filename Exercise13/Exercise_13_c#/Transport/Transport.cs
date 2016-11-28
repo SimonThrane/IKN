@@ -11,10 +11,11 @@ namespace Transportlaget
 	/// </summary>
 	public class Transport
 	{
-		/// <summary>
-		/// The link.
-		/// </summary>
-		private Link link;
+	    private const int MAXCOUNT = 5;
+        /// <summary>
+        /// The link.
+        /// </summary>
+        private Link link;
 		/// <summary>
 		/// The 1' complements checksum.
 		/// </summary>
@@ -106,10 +107,12 @@ namespace Transportlaget
 				buffer[(int)TransCHKSUM.TYPE] = (byte)(int)TransType.DATA;
 				Array.Copy(buf,0,buffer, 4, buf.Length);
 				checksum.calcChecksum(ref buffer,size+4);
+		    int counter = 0;
 
 			do {
 				link.send (buffer, buffer.Length);
-			} while (!receiveAck ());				
+			    counter++;
+			} while (!receiveAck () || counter > MAXCOUNT);				
 		}
 
 		/// <summary>
