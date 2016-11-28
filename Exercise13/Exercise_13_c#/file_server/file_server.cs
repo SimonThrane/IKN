@@ -20,12 +20,14 @@ namespace Application
 		/// </summary>
 		private file_server ()
 		{
+			int bytelength;
 			byte[] buf = new byte[BUFSIZE];
 			Transport = new Transport (BUFSIZE);
 			byte[] noFile = Encoding.ASCII.GetBytes ("File does not exist");
 
 			while (true) {
-				Transport.receive (ref buf);
+				bytelength = Transport.receive (ref buf);
+				Console.WriteLine (bytelength.ToString());
 				string filename = System.Text.Encoding.Default.GetString (buf);
 				long size=(LIB.check_File_Exists(filename));
 				Transport.send (Encoding.ASCII.GetBytes (filename), Encoding.ASCII.GetBytes (filename).Length);

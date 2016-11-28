@@ -132,7 +132,7 @@ namespace Transportlaget
 			} while(!ack);
 
 			Array.Copy (buffer, 4, buf, 0, size-4);
-			return buf.Length;
+			return size-4;
 		}
 	}
 }
