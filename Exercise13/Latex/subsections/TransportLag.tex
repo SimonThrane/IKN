@@ -1,1 +1,44 @@
-Indsæt beskrivelse for Transportlag
+Transport lagets primære funktion er at sørge for pålidlig transmission mellem de to parter på trods af en upålidelig kanal. 
+Denne pålidlighed er implementeret ved brug af en 16-bit checksum, sekvensnumre og ved brug af acknowledge-beskeder på baggrund af hver enkel data packet. 
+I transportlaget er der lavet på en send- og recievemetode i følgende afsnit beskrives implementeringen af disse. Implementeringen af disse bygger på den udleverede kode til at sende acknowledges og beregne checksum mm. Denne kode vil ikke blive beskrevet ydereligere.
+
+\subsection{Send metoden}
+\begin{verbatim}
+public void send (byte[] buf, int size)
+\end{verbatim}
+I send metoden bliver pålidelig kommunikation sikret ved, at der først indsættes sekvensnummer + transporttype. Derefter bliver den 16-bit checksum beregnet og indsat i et array. Derefter sendes beskeden gennem link-laget. Der sendes indtil, at der bliver modtaget en ack på den pågældende packet (Dette tjekkes på baggrund af sekvensnumre) eller, at den samme besked er sendt 5 gange.
+\begin{lstlisting}
+buffer [(int)TransCHKSUM.SEQNO] = (byte)seqNo;
+buffer[(int)TransCHKSUM.TYPE]=(byte)(int)TransType.DATA;
+Array.Copy(buf,0,buffer, 4, size);
+checksum.calcChecksum(ref buffer,size+4);
+int counter = 0;
+
+do {
+	link.send (buffer, size+4);
+	counter++;
+} while (!receiveAck () || counter > MAXCOUNT);	
+\end{lstlisting}
+
+\noindent Af væsentlige ting på at bemærke af implementeringen kan det ses, at der tilføjes 4 bytes til bufferen, der modtages fra applikationslaget. Disse 4 bytes er 16-bit checksum, 8-bit sekvensnummer og 8-bit datatype. 
+
+\subsection{Recieve metoden}
+\begin{verbatim}
+public int recieve (ref byte[] buf)
+\end{verbatim}
+
+I sendmetoden er den primære opgave, at modtage beskeden fra linklaget og beregne checksummen på denne og, hvis checksum er korrekt retuneres en acknowledge til afsenderen. Hvis checksummen er forkert sendes intet og en den samme packet modtages og fortolkes igen. Dette forsættes indtil, at packetten er korrekt modtaget. Når packeten er korrekt modtaget pilles packetens header af og bufferen retuneres til applikationslaget. Størrelsen på packeten bliver også retuneret.
+
+\noindent Neden for ses implementeringen:
+\begin{lstlisting}
+bool ack;
+int size;
+do {
+	size = link.receive (ref buffer);
+	ack=(checksum.checkChecksum (buffer, size));
+	sendAck(ack);
+} while(!ack);
+
+Array.Copy (buffer, 4, buf, 0, size-4);
+return size-4;
+\end{lstlisting}
