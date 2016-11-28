@@ -112,7 +112,7 @@ namespace Linklaget
 					}
 			}
 
-			return buf.Length;
+			return f;
 						
 		}
 	}
