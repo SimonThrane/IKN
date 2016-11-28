@@ -31,6 +31,7 @@ namespace Application
 			Console.WriteLine ("Client started");
 			Transport clientSocket = new Transport (BUFSIZE);
 			clientSocket.send (Encoding.ASCII.GetBytes (args [0]),Encoding.ASCII.GetBytes (args [0]).Length);
+			Console.WriteLine (Encoding.ASCII.GetBytes (args [0]).Length.ToString());
 			clientSocket.receive (ref buffer);
 			Console.WriteLine (Encoding.ASCII.GetString (buffer));
 			clientSocket.receive (ref buffer);
