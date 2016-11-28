@@ -35,10 +35,16 @@ namespace Application
 			Console.WriteLine (Encoding.ASCII.GetBytes (args [0]).Length.ToString());
 			//Filename
 			bytelength=clientSocket.receive (ref buffer);
-			Console.WriteLine (Encoding.ASCII.GetString (buffer).Substring(0,bytelength));
+			var filename = Encoding.ASCII.GetString (buffer).Substring (0, bytelength);
+			Console.WriteLine (filename);
 			//Filesize
 			bytelength = clientSocket.receive (ref buffer);
 			Console.WriteLine (Encoding.ASCII.GetString (buffer).Substring(0,bytelength));
+			var filesize = Int64.Parse (Encoding.ASCII.GetString (buffer).Substring (0, bytelength));
+			if (filesize>0)
+				{
+				receiveFile (filename, clientSocket,filesize);
+				}
 			/*receiveFile (args [0], clientSocket);*/
 		}
 
@@ -51,12 +57,11 @@ namespace Application
 		/// <param name='io'>
 		/// Network stream for reading from the server
 		/// </param>
-		private void receiveFile (string fileName, Transport transport)
+		private void receiveFile (string fileName, Transport transport, long fileSize)
 		{
 			int bytesRead = 0;
 			long accumulatedBytes = 0;
-			int size=transport.receive (ref buffer);
-			long fileSize = BitConverter.ToInt64(buffer,0);
+
 			if ( fileSize> 0) {
 				var file = File.Create (fileName);
 

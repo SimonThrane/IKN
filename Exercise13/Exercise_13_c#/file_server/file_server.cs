@@ -31,14 +31,15 @@ namespace Application
 				string filename = System.Text.Encoding.Default.GetString (buf).Substring(0,bytelength);
 				long size=(LIB.check_File_Exists(filename));
 				Transport.send (Encoding.ASCII.GetBytes (filename), Encoding.ASCII.GetBytes (filename).Length);
-
-				Transport.send (BitConverter.GetBytes (size), BitConverter.GetBytes(size).Length);
-				/*if (size > 0)
+				var sizeinbytes = Encoding.ASCII.GetBytes(size.ToString());
+				var sizeinbyteslength = sizeinbytes.Length;
+				Transport.send (sizeinbytes, sizeinbyteslength);
+				if (size > 0)
 					sendFile (filename, size, Transport);
 				else {
 					Console.WriteLine ("File does not exist");
-					sendFile (filename, size, Transport);
-				}*/
+					//sendFile (filename, size, Transport);
+				}
 			}
 		
 		}
@@ -58,8 +59,6 @@ namespace Application
 		private void sendFile(String fileName, long fileSize, Transport transport)
 		{
 			Byte[] buffer = new Byte[BUFSIZE];
-
-			transport.send (BitConverter.GetBytes (fileSize), BitConverter.GetBytes (fileSize).Length);
 
 			var fileStream = new FileStream (fileName,FileMode.Open,FileAccess.Read);
 
