@@ -105,12 +105,12 @@ namespace Transportlaget
 		{
 				buffer [(int)TransCHKSUM.SEQNO] = (byte)seqNo;
 				buffer[(int)TransCHKSUM.TYPE] = (byte)(int)TransType.DATA;
-				Array.Copy(buf,0,buffer, 4, buf.Length);
+			Array.Copy(buf,0,buffer, 4, size);
 				checksum.calcChecksum(ref buffer,size+4);
 		    int counter = 0;
 
 			do {
-				link.send (buffer, buffer.Length);
+				link.send (buffer, size+4);
 			    counter++;
 			} while (!receiveAck () || counter > MAXCOUNT);				
 		}
