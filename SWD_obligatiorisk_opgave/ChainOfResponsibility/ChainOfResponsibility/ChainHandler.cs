@@ -12,20 +12,4 @@
         public abstract T Parse(string inputdata, string inputtype);
 
     }
-
-    class XMLParser<T> : ChainHandler<T>
-    {
-        public override T Parse(string inputdata, string inputtype)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
-
-    class JsonParser<T> : ChainHandler<T>
-    {
-        public override T Parse(string inputdata, string inputtype)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
 }
