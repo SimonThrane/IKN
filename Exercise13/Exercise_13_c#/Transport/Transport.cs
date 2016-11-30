@@ -66,11 +66,11 @@ namespace Transportlaget
 			int size = link.receive(ref buf);
 			if (size != (int)TransSize.ACKSIZE) return false;
 			//Force error
-			/*errorCount++;
+			errorCount++;
 			if (errorCount == 4) {
 				buf [0]++;
 				Console.WriteLine ("Fejl i ACK");
-			}*/
+			}
 			//
 			if(!checksum.checkChecksum(buf, (int)TransSize.ACKSIZE) ||
 					buf[(int)TransCHKSUM.SEQNO] != seqNo ||
