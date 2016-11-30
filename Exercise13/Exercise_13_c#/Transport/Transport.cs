@@ -11,7 +11,7 @@ namespace Transportlaget
 	/// </summary>
 	public class Transport
 	{
-	    private const int MAXCOUNT = 5;
+	    private const int MAXCOUNT = 5+5;
         /// <summary>
         /// The link.
         /// </summary>
@@ -65,6 +65,13 @@ namespace Transportlaget
 			byte[] buf = new byte[(int)TransSize.ACKSIZE];
 			int size = link.receive(ref buf);
 			if (size != (int)TransSize.ACKSIZE) return false;
+			//Force error
+			/*errorCount++;
+			if (errorCount == 4) {
+				buf [0]++;
+				Console.WriteLine ("Fejl i ACK");
+			}*/
+			//
 			if(!checksum.checkChecksum(buf, (int)TransSize.ACKSIZE) ||
 					buf[(int)TransCHKSUM.SEQNO] != seqNo ||
 					buf[(int)TransCHKSUM.TYPE] != (int)TransType.ACK)
@@ -112,13 +119,13 @@ namespace Transportlaget
 				Array.Copy(buf,0,buffer, 4, size);
 				checksum.calcChecksum(ref buffer,size+4);
 
-				link.send (buffer, size+4);
 				errorCount++;
 				if (errorCount == 1)
 				{
 					buffer[0]++;
 					Console.WriteLine("Fejl i transmission, forsøger igen");
 				}
+				link.send (buffer, size+4);
 
 			} while (!receiveAck () || errorCount > MAXCOUNT);				
 		}
