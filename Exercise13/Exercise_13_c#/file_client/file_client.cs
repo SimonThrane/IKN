@@ -43,8 +43,8 @@ namespace Application
 			var filesize = Int64.Parse (Encoding.ASCII.GetString (buffer).Substring (0, bytelength));
 			if (filesize>0)
 				{
-					//var extractedFilename = LIB.extractFileName (filename);
-					receiveFile (filename, clientSocket,filesize);
+					var extractedFilename = LIB.extractFileName (filename);
+					receiveFile ("root/Desktop/" + extractedFilename, clientSocket,filesize);
 				}
 			/*receiveFile (args [0], clientSocket);*/
 		}
