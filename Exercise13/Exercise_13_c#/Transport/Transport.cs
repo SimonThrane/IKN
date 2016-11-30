@@ -126,7 +126,7 @@ namespace Transportlaget
 				}
 				link.send (buffer, size+4);
 
-			} while (!receiveAck () || errorCount > MAXCOUNT);				
+			} while (!receiveAck ());				
 		}
 
 		/// <summary>
