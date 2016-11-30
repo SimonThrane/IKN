@@ -65,13 +65,6 @@ namespace Transportlaget
 			byte[] buf = new byte[(int)TransSize.ACKSIZE];
 			int size = link.receive(ref buf);
 			if (size != (int)TransSize.ACKSIZE) return false;
-			//Force error
-			errorCount++;
-			if (errorCount == 4) {
-				buf [0]++;
-				Console.WriteLine ("Fejl i ACK");
-			}
-			//
 			if(!checksum.checkChecksum(buf, (int)TransSize.ACKSIZE) ||
 					buf[(int)TransCHKSUM.SEQNO] != seqNo ||
 					buf[(int)TransCHKSUM.TYPE] != (int)TransType.ACK)
@@ -95,6 +88,14 @@ namespace Transportlaget
 					(ackType ? (byte)buffer [(int)TransCHKSUM.SEQNO] : (byte)(buffer [(int)TransCHKSUM.SEQNO] + 1) % 2);
 			ackBuf [(int)TransCHKSUM.TYPE] = (byte)(int)TransType.ACK;
 			checksum.calcChecksum (ref ackBuf, (int)TransSize.ACKSIZE);
+
+			//Force error
+			errorCount++;
+			if (errorCount == 1) {
+				ackBuf [0]++;
+				Console.WriteLine ("Fejl i ACK");
+			}
+			//
 
 			link.send(ackBuf, (int)TransSize.ACKSIZE);
 		}
@@ -138,6 +139,7 @@ namespace Transportlaget
 		/// </param>
 		public int receive (ref byte[] buf)
 		{
+			errorCount = 0;
 			bool ack;
 			int size;
 			do {
