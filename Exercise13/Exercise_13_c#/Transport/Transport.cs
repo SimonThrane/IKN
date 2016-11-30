@@ -91,7 +91,7 @@ namespace Transportlaget
 
 			//Force error
 			errorCount++;
-			if (errorCount == 1) {
+			if (errorCount == 7) {
 				ackBuf [0]++;
 				Console.WriteLine ("Fejl i ACK");
 			}
@@ -111,8 +111,6 @@ namespace Transportlaget
 		/// </param>
 		public void send(byte[] buf, int size)
 		{
-				
-			errorCount = 0;
 
 			do {
 				buffer [(int)TransCHKSUM.SEQNO] = (byte)seqNo;
@@ -121,7 +119,7 @@ namespace Transportlaget
 				checksum.calcChecksum(ref buffer,size+4);
 
 				errorCount++;
-				if (errorCount == 1)
+				if (errorCount == 5)
 				{
 					buffer[0]++;
 					Console.WriteLine("Fejl i transmission, forsøger igen");
@@ -139,7 +137,6 @@ namespace Transportlaget
 		/// </param>
 		public int receive (ref byte[] buf)
 		{
-			errorCount = 0;
 			bool ack;
 			int size;
 			do {
