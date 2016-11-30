@@ -103,16 +103,24 @@ namespace Transportlaget
 		/// </param>
 		public void send(byte[] buf, int size)
 		{
-				buffer [(int)TransCHKSUM.SEQNO] = (byte)seqNo;
-				buffer[(int)TransCHKSUM.TYPE] = (byte)(int)TransType.DATA;
-			Array.Copy(buf,0,buffer, 4, size);
-				checksum.calcChecksum(ref buffer,size+4);
-		    int counter = 0;
+				
+			errorCount = 0;
 
 			do {
+				buffer [(int)TransCHKSUM.SEQNO] = (byte)seqNo;
+				buffer[(int)TransCHKSUM.TYPE] = (byte)(int)TransType.DATA;
+				Array.Copy(buf,0,buffer, 4, size);
+				checksum.calcChecksum(ref buffer,size+4);
+
 				link.send (buffer, size+4);
-			    counter++;
-			} while (!receiveAck () || counter > MAXCOUNT);				
+				errorCount++;
+				if (errorCount == 1)
+				{
+					buffer[0]++;
+					Console.WriteLine("Fejl i transmission, forsøger igen");
+				}
+
+			} while (!receiveAck () || errorCount > MAXCOUNT);				
 		}
 
 		/// <summary>

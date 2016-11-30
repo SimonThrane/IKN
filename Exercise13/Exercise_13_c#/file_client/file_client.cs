@@ -44,7 +44,7 @@ namespace Application
 			if (filesize>0)
 				{
 				var extractedFilename = LIB.extractFileName (filename);
-				receiveFile (extractedFilename, clientSocket,filesize);
+				receiveFile ("/Desktop/"+extractedFilename, clientSocket,filesize);
 				}
 			/*receiveFile (args [0], clientSocket);*/
 		}
