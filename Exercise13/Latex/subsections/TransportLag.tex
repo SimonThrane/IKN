@@ -6,7 +6,7 @@ I transportlaget er der lavet på en send- og recievemetode i følgende afsnit b
 \begin{verbatim}
 public void send (byte[] buf, int size)
 \end{verbatim}
-I send metoden bliver pålidelig kommunikation sikret ved, at der først indsættes sekvensnummer + transporttype. Derefter bliver den 16-bit checksum beregnet og indsat i et array. Derefter sendes beskeden gennem link-laget. Der sendes indtil, at der bliver modtaget en ack på den pågældende package (Dette tjekkes på baggrund af sekvensnumre) eller, at den samme besked er sendt 5 gange.
+I send metoden bliver pålidelig kommunikation sikret ved, at der først indsættes sekvensnummer + transporttype. Derefter bliver den 16-bit checksum beregnet og indsat i et array. Derefter sendes beskeden gennem link-laget. Der sendes indtil, at der bliver modtaget en ack på den pågældende package (Dette tjekkes på baggrund af sekvensnumre).
 \begin{lstlisting}
 do {
 	buffer [(int)TransCHKSUM.SEQNO] = (byte)seqNo;
