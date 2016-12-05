@@ -1,0 +1,43 @@
+Link laget er i den udviklede protocol stak det nederste, og altså det der ligger lige over stakkens fysiske lag. I det udleverede matriale var en smule af link laget allerede lavet, så det af gruppen implementerede er hhv. send og recieve metoden.
+
+\subsection{Send metoden}
+
+\begin{verbatim}
+public void send (byte[] buf, int size)
+\end{verbatim}
+
+I send metoden er det væsentlige at der sørges for at pakke den sendte information ind så at der ligger et 'A' som start og slut på hvert sendt sekvens, som benævnes delimiters.  Derfor er det også nødvendigt at køre en algoritme så 'A'et er et unikt start og slut kodon. I denne opgave bliver et 'A' der ønskes at sendes til et "BC" og et 'B' til "BD". Dette er i virkeligheden en modificeret SLIP metode.
+
+
+\begin{lstlisting}
+	int j=1;
+	for (int i = 0; i < size; i++) {
+		if(buf[i] == (byte)('A'))
+			{
+			buffer[j++]=Convert.ToByte('B');
+			buffer[j++]=Convert.ToByte('C');
+
+			}
+		else if(buf[i] == (byte)('B'))
+			{
+			buffer[j++]=Convert.ToByte('B');
+			buffer[j++]=Convert.ToByte('D');
+			}
+		else{
+			buffer [j++] = buf [i];
+			}
+		}
+\end{lstlisting}
+
+Som det kan ses i koden holdes der styr på både den af transportlaget givne streng, og den streng der skal sendes videre til det fysiske lag. Desuden bruges en allerede lavet buffer der er garanteret at være stor nok (kan ikke ses i kodenlistingen).\\
+
+\noindent Læg også mærke til at j starter ved 1 for at der således senere kan sættes 'A' ind på den forreste plads. Koden for sendingen og delimiterindsættelse ses nedenfor.
+
+\begin{verbatim}
+buffer[0]=Convert.ToByte('A');
+buffer[j++]=Convert.ToByte('A');
+serialPort.Write (buffer, 0, j);
+\end{verbatim}
+
+\subsection{Receive metoden}
+Nu ses der således på den modtagende del af protokol laget hvor link laget således er det første ikke fysiske lag dataen rammer. Link bruger de tidligere omtalte delimiters til at se hvad de har modtaget, og kører derefter en antiSLIP metode, hvorefter den sender informationen videre til transport laget. 

@@ -7,12 +7,3 @@ Testen af send-metoden blev testet ved, at i den ene host blev File-clienten sta
 
 
 \section{Test af Transport Lag}
-Det blev testet, at transportlaget kunne udføre en re-transmission ved en fejl. For at teste dette blev der introduceret en fejl i hver af metoderne send() og sendAck().Fejlen blev introduceret i begge metoder ved at smadre checksummen.
-\begin{lstlisting}
-	errorCount++;
-	if (errorCount == 5)
-	{
-		buffer[0]++;
-		Console.WriteLine("Fejl i transmission, forsoeger igen");
-	}
-\end{lstlisting}
