@@ -2,9 +2,11 @@
 Denne opgave omhandler udviklingen af en kommunicationsprotocol, bestående af et link, transport, application og fysisk lag. Der har til opgaven været en del udleveret matriale, men gruppen har selvstændigt udviklet:
 
 \begin{itemize}
-	\item Et link lags SLIP og antiSLIP protokol.
-	\item En troværdig transportlagsprotokol med transportlagsheader, som følger lærerbogens rd2.0 protokol.
+	\item Et link lag med SLIP og antiSLIP protokol.
+	\item En troværdig transportlagsprotokol med transportlagsheader, som følger lærerbogens rd2.2 protokol.
+	\item Et pålideligt transportlag der kan retransmittere ved både data og ACK. 
 	\item Et applikationslag der sender data i pakker af 1000 bytes af gangen, der således passer med de lavere lag af protokollen.
+	
 \end{itemize}  
 
 I de følgende afsnit beskrives efter buttom up princippet, hvordan de enkelte lag fungere og snakker sammen.
