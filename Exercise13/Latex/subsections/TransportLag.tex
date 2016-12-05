@@ -8,16 +8,16 @@ public void send (byte[] buf, int size)
 \end{verbatim}
 I send metoden bliver pålidelig kommunikation sikret ved, at der først indsættes sekvensnummer + transporttype. Derefter bliver den 16-bit checksum beregnet og indsat i et array. Derefter sendes beskeden gennem link-laget. Der sendes indtil, at der bliver modtaget en ack på den pågældende package (Dette tjekkes på baggrund af sekvensnumre) eller, at den samme besked er sendt 5 gange.
 \begin{lstlisting}
-buffer [(int)TransCHKSUM.SEQNO] = (byte)seqNo;
-buffer[(int)TransCHKSUM.TYPE]=(byte)(int)TransType.DATA;
-Array.Copy(buf,0,buffer, 4, size);
-checksum.calcChecksum(ref buffer,size+4);
-int counter = 0;
-
 do {
+	buffer [(int)TransCHKSUM.SEQNO] = (byte)seqNo;
+	buffer[(int)TransCHKSUM.TYPE] = (byte)(int)TransType.DATA;
+	Array.Copy(buf,0,buffer, 4, size);
+	checksum.calcChecksum(ref buffer,size+4);
+
 	link.send (buffer, size+4);
-	counter++;
-} while (!receiveAck () || counter > MAXCOUNT);	
+
+} while (!receiveAck ());	
+old_seqNo = DEFAULT_SEQNO;	
 \end{lstlisting}
 
 \noindent Væsentlige at bemærke er det at af implementeringen kan det ses, at der tilføjes 4 bytes til bufferen, der modtages fra applikationslaget. Disse 4 bytes er 16-bit checksum, 8-bit sekvensnummer og 8-bit datatype. Denne er en transportlags header. 
@@ -27,18 +27,26 @@ do {
 public int recieve (ref byte[] buf)
 \end{verbatim}
 
-I recieve metoden er den primære opgave, at modtage beskeden fra linklaget og beregne checksummen på denne. Hvis checksum er korrekt retuneres en acknowledge til afsenderen. Hvis checksummen er forkert sendes intet, og en den samme package modtages og fortolkes igen. Dette forsættes indtil, at packagen er korrekt modtaget. Når packagen er korrekt modtaget pilles transport headeren af og bufferen retuneres til applikationslaget. Størrelsen på packeten bliver også retuneret.
+I recieve metoden er den primære opgave, at modtage beskeden fra linklaget og beregne checksummen på denne. Hvis checksum er korrekt retuneres en acknowledge til afsenderen. Hvis checksummen er forkert sendes intet, og en den samme pakke modtages og fortolkes igen. Dette forsættes indtil, at pakken er korrekt modtaget. Når pakken er korrekt modtaget, tjekkes sekvensnummeret på den modtagne pakke, dette skal være forskellig fra det gamle sekvensnummer. Hvis sekvensnummeret er forskelligt antages det, at pakken er korekt og denne indlæses i en buffer, der retuneres til applikationslaget. Hvis sekvensnummeret er identisk med det gamle sekvensnummer sættes size til 4. Dette er ikke et tilfældigt tal, da 4 er størrelsen på pakkens header. Størrelsen på pakken bliver også retuneret til applikationslaget.
 
 \noindent Neden for ses implementeringen:
 \begin{lstlisting}
 bool ack;
 int size;
 do {
-	size = link.receive (ref buffer);
-	ack=(checksum.checkChecksum (buffer, size));
-	sendAck(ack);
-} while(!ack);
+	do {
+		size = link.receive (ref buffer);
+		ack = (checksum.checkChecksum (buffer, size));
+		sendAck (ack);
+	} while(!ack);
 
-Array.Copy (buffer, 4, buf, 0, size-4);
+	if (buffer [(int)TransCHKSUM.SEQNO] != (byte)old_seqNo) {
+		Array.Copy (buffer, 4,buf, 0,size-4);
+		old_seqNo = buffer [(int)TransCHKSUM.SEQNO];
+	} else {
+		size = 4;
+	}
+} while(size == 4);
 return size-4;
+}
 \end{lstlisting}
