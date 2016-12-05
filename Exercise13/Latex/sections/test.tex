@@ -2,7 +2,7 @@
 Dette afsnit omhandler test af de udviklede kommunikationsprotokoler. Generelt for testen af systemet gælder det, at der er blevet anvendt en bottom-up approach, hvilket betyder, at først er link-laget blevet skrevet og siden testen ved brug af minicom og mock-udgaver af transport- og applikationslaget. Det samme har været tilfældet for transportlaget, der er blevet testet ved at mocke de overliggende lag ud. I de følgende afsnit følger mere information omkring de enkelte test.
 
 \section{Test af Link Lag}
-Link laget blev testet ved at bypasse både transport og applikationslaget. Det bev gjort ved, at  applikationslaget kaldte udkritisk ned i transport laget, der siden kaldte direkte ned i link laget med dataene modtaget fra applikaionslaget.
+Link laget blev testet ved at bypasse både transport og applikationslaget. Det blev gjort ved, at  applikationslaget kaldte udkritisk ned i transport laget, der siden kaldte direkte ned i link laget med dataene modtaget fra applikaionslaget.
 Testen af send-metoden blev testet ved, at i den ene host blev File-clienten startet i terminalen, hvor der som argument blev givet en tekststreng med, der skulles sendes til modtageren. Modtageren blev sat op i den anden host som minicom, der blev siden verificeret, at der modtaget det rigtige på baggrund af, hvad klienten sendte. F.eks. hvis der blev sendt: "Hej"  i clienten blev der modtaget: "AHejA".
 
 
