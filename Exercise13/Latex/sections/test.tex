@@ -16,3 +16,27 @@ Det blev testet, at transportlaget kunne udføre en re-transmission ved en fejl.
 		Console.WriteLine("Fejl i transmission, forsoeger igen");
 	}
 \end{lstlisting}
+
+På trods af, at fejlen blev indført virkede transmissionen, da transportlaget sørgede for re-transmission ved ødelagte data.
+
+\section{Test af hele systemet}
+Hele systemet blev testet ved at starte serveren i den ene Ubuntu Host. I den anden host blev clienten startet i terminalen, hvor den blev kaldt med sti-angivelse + filnavn på den fil, der ønskede overført. 
+På billedet \ref{fig:Overforsel} ses, hvordan en test blev kørt.
+\begin{figure}[H]
+	\centering
+	\includegraphics
+	[width=140mm]{Testbilleder/overforsel.png}
+	\caption{Eksempel på en overførsel}
+	\label{fig:Overforsel}
+\end{figure} 
+
+Da filen var overført blev, det tjekket at den tilsendte fil var identisk med den oprindelige ved brug af den indbygge Linux kommando diff.
+På figur \ref{fig:diff} ses resultatet af diff, kommandoen.
+\begin{figure}[H]
+	\centering
+	\includegraphics
+	[width=140mm]{Testbilleder/diff.png}
+	\caption{Ingen fejl i transmission, de to filer er identiske}
+	\label{fig:diff}
+\end{figure} 
+Som det fremgår er den originale fil identisk med den tilsendte fil. Protokolen blev testet med flere filer, hvor den største var et billede på 5.2mb. På baggrund af disse test kunne det konkluderes at protokolstakken virkede.
