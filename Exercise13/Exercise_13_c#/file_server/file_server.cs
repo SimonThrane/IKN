@@ -23,7 +23,6 @@ namespace Application
 			int bytelength;
 			byte[] buf = new byte[BUFSIZE];
 			Transport = new Transport (BUFSIZE);
-			byte[] noFile = Encoding.ASCII.GetBytes ("File does not exist");
 
 			while (true) {
 				bytelength = Transport.receive (ref buf);
@@ -38,10 +37,8 @@ namespace Application
 					sendFile (filename, size, Transport);
 				else {
 					Console.WriteLine ("File does not exist");
-					//sendFile (filename, size, Transport);
 				}
 			}
-		
 		}
 
 		/// <summary>
