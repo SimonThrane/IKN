@@ -1,1 +1,56 @@
-Applicationslagets a
+I opgaven blev applikationslaget fra øvelse 8 genbrugt og rettet til for at passe med det nye transportlag. Nedenfor ses koden for serveren.
+
+\begin{lstlisting}
+		private file_server ()
+		{
+			int bytelength;
+			byte[] buf = new byte[BUFSIZE];
+			Transport = new Transport (BUFSIZE);
+
+			while (true) {
+				bytelength = Transport.receive (ref buf);
+				Console.WriteLine (bytelength.ToString());
+				string filename = System.Text.Encoding.Default.GetString (buf).Substring(0,bytelength);
+				long size=(LIB.check_File_Exists(filename));
+				Transport.send (Encoding.ASCII.GetBytes (filename), Encoding.ASCII.GetBytes (filename).Length);
+				var sizeinbytes = Encoding.ASCII.GetBytes(size.ToString());
+				var sizeinbyteslength = sizeinbytes.Length;
+				Transport.send (sizeinbytes, sizeinbyteslength);
+				if (size > 0)
+					sendFile (filename, size, Transport);
+				else {
+					Console.WriteLine ("File does not exist");
+				}
+			}
+		}
+\end{lstlisting}
+
+Koden fra serveren fungerer således at den iterativt venter på en forespørgsel fra en klient.  Når den modtager en forespørgsel sender den først og fremmest filens størrelse. Hvis den modtager en forespørgsel på en fil der findes sendes en filstørrelse på nul og en fejlmeddelelse udskrives i serveren. Hvis filen findes sendes denne.
+
+Nedenfor ses koden for klienten.
+\begin{lstlisting}
+		private file_client (string[] args)
+		{
+			int bytelength;
+			buffer = new byte[BUFSIZE];
+			Console.WriteLine ("Client started");
+			Transport clientSocket = new Transport (BUFSIZE);
+			clientSocket.send (Encoding.ASCII.GetBytes (args [0]),Encoding.ASCII.GetBytes (args [0]).Length);
+			Console.WriteLine (Encoding.ASCII.GetBytes (args [0]).Length.ToString());
+			//Filename
+			bytelength=clientSocket.receive (ref buffer);
+			var filename = Encoding.ASCII.GetString (buffer).Substring (0, bytelength);
+			Console.WriteLine (filename);
+			//Filesize
+			bytelength = clientSocket.receive (ref buffer);
+			Console.WriteLine (Encoding.ASCII.GetString (buffer).Substring(0,bytelength));
+			var filesize = Int64.Parse (Encoding.ASCII.GetString (buffer).Substring (0, bytelength));
+			if (filesize>0)
+				{
+					var extractedFilename = LIB.extractFileName (filename);
+					receiveFile ("/root/Desktop/" + extractedFilename, clientSocket,filesize);
+				}
+		}
+\end{lstlisting}
+
+Klienten fungerer ved at tage et argument ind fra kommandolinjen som er den sti på den fil man ønsker fra serveren. Denne sti sendes til serveren som sender en filstørrelse tilbage. Hvis denne filstørrelse er større end 0 bliver denne fil gemt på stien "/root/Desktop" på klienten. Hvis den modtaget filstørrelse er nul gøres ingenting.
