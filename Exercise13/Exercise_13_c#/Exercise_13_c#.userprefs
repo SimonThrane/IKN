@@ -1,11 +1,11 @@
 ﻿<Properties StartupItem="file_server/file_server.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="file_client/file_client.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Transport/Transport.cs">
     <Files>
       <File FileName="Link/Link.cs" Line="1" Column="1" />
-      <File FileName="file_server/file_server.cs" Line="1" Column="1" />
-      <File FileName="Transport/Transport.cs" Line="117" Column="3" />
-      <File FileName="file_client/file_client.cs" Line="47" Column="60" />
+      <File FileName="file_server/file_server.cs" Line="38" Column="43" />
+      <File FileName="Transport/Transport.cs" Line="113" Column="4" />
+      <File FileName="file_client/file_client.cs" Line="47" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

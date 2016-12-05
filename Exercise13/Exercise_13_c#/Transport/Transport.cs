@@ -126,7 +126,8 @@ namespace Transportlaget
 				}
 				link.send (buffer, size+4);
 
-			} while (!receiveAck ());				
+			} while (!receiveAck ());	
+			old_seqNo = DEFAULT_SEQNO;
 		}
 
 		/// <summary>
@@ -140,12 +141,22 @@ namespace Transportlaget
 			bool ack;
 			int size;
 			do {
-				size = link.receive (ref buffer);
-				ack=(checksum.checkChecksum (buffer, size));
-				sendAck(ack);
-			} while(!ack);
+				do {
+					size = link.receive (ref buffer);
+					ack = (checksum.checkChecksum (buffer, size));
+					sendAck (ack);
+				} while(!ack);
+				//Check seq
+				if (buffer [(int)TransCHKSUM.SEQNO] != (byte)old_seqNo) {
+					Array.Copy (buffer, 4,buf, 0,size-4);
+					old_seqNo = buffer [(int)TransCHKSUM.SEQNO];
 
-			Array.Copy (buffer, 4, buf, 0, size-4);
+				} else {
+				
+					size = 4;
+				}
+
+			} while(size == 4);
 			return size-4;
 		}
 	}
