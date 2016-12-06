@@ -25,6 +25,8 @@ namespace ChainOfResponsibility
 
             XmlSerializer xs = new XmlSerializer(typeof(Car));
 
+            List <Car> carlist = new List<Car>();
+
             //Generate data.
 
             var c = new Car();
@@ -81,6 +83,22 @@ namespace ChainOfResponsibility
                 InputData = "sfjkdbgfkbg"
             });
 
+            foreach(var item in data)
+            {
+               carlist.Add(handler1.Parse(item.InputData,item.InputType));
+            }
+
+            Console.WriteLine("\n\n");
+
+            foreach (var item in carlist)
+            {
+                if(item != null)
+                Console.WriteLine(item.Owner + " " + item.Model);
+                else
+                {
+                    Console.WriteLine("Ikke korrekt object");
+                }
+            }
 
 
         }

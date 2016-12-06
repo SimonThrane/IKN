@@ -5,3 +5,11 @@ C:\Users\kaspe\Desktop\Skole\4-semester\IKN\Repo\IKN\SWD_obligatiorisk_opgave\Ch
 C:\Users\kaspe\Desktop\Skole\4-semester\IKN\Repo\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\Newtonsoft.Json.xml
 C:\Users\kaspe\Desktop\Skole\4-semester\IKN\Repo\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\obj\Debug\ChainOfResponsibility.exe
 C:\Users\kaspe\Desktop\Skole\4-semester\IKN\Repo\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\obj\Debug\ChainOfResponsibility.pdb
+C:\Users\Lars Hjerrild\Documents\My Documents\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.exe.config
+C:\Users\Lars Hjerrild\Documents\My Documents\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.exe
+C:\Users\Lars Hjerrild\Documents\My Documents\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.pdb
+C:\Users\Lars Hjerrild\Documents\My Documents\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Lars Hjerrild\Documents\My Documents\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Lars Hjerrild\Documents\My Documents\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\obj\Debug\ChainOfResponsibility.csprojResolveAssemblyReference.cache
+C:\Users\Lars Hjerrild\Documents\My Documents\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\obj\Debug\ChainOfResponsibility.exe
+C:\Users\Lars Hjerrild\Documents\My Documents\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\obj\Debug\ChainOfResponsibility.pdb
