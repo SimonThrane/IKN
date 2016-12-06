@@ -8,9 +8,13 @@ namespace ChainOfResponsibility
     {
         public override T Parse(string inputdata, string inputtype)
         {
-            var serializer = new XmlSerializer(typeof(T));
-            var type = (T)serializer.Deserialize(new StringReader(inputdata));
-            return type;
+            if (inputtype.ToLower() == "xml")
+            {
+                var serializer = new XmlSerializer(typeof(T));
+                var type = (T) serializer.Deserialize(new StringReader(inputdata));
+                return type;
+            }
+            return NextChain.Parse(inputdata, inputtype);
         }
     }
 }
