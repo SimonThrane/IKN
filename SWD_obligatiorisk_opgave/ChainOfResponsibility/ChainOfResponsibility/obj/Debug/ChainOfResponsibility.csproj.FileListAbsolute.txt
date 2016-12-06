@@ -1,8 +1,0 @@
-C:\Users\Lars Hjerrild\Documents\Skole\I4IKN\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.exe.config
-C:\Users\Simon\Desktop\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.exe.config
-C:\Users\Simon\Desktop\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.exe
-C:\Users\Simon\Desktop\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.pdb
-C:\Users\Simon\Desktop\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Simon\Desktop\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Simon\Desktop\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\obj\Debug\ChainOfResponsibility.exe
-C:\Users\Simon\Desktop\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\obj\Debug\ChainOfResponsibility.pdb
