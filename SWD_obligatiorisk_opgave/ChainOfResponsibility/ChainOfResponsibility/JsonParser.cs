@@ -7,10 +7,10 @@ namespace ChainOfResponsibility
     {
         public override T Parse(string inputdata, string inputtype)
         {
-            if (inputtype == "JSON")
+            if (inputtype.ToLower() == "json")
             {
                 Console.WriteLine("This i JSON I am parsing this");
-                T data=JsonConvert.DeserializeObject<T>(inputdata);
+                T data= JsonConvert.DeserializeObject<T>(inputdata);
                 return data;
             }
             else

@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace ChainOfResponsibility
 {
@@ -19,12 +23,83 @@ namespace ChainOfResponsibility
             handler1.SetNextChain(handler2);
             handler2.SetNextChain(handler3);
 
+            XmlSerializer xs = new XmlSerializer(typeof(Car));
+
+            List <Car> carlist = new List<Car>();
+
             //Generate data.
             List<Data> testdata= new List<Data>();
 
-            
+            var c = new Car();
+            c.Age = 5;
+            c.Model = "Audi";
+            c.Owner = "Casper";
 
+            var c1 = new Car();
+            c1.Age = 3;
+            c1.Model = "VW";
+            c1.Owner = "Simon";
+
+            var c2 = new Car();
+            c2.Age = 8;
+            c2.Model = "BMW";
+            c2.Owner = "Lars";
+
+            string xml1;
+
+            var data = new List<Data>
+            {
+                new ChainOfResponsibility.Data
+                {
+                    InputData = JsonConvert.SerializeObject(c),
+                    InputType = "json"
+                }
+            };
+
+
+            using (var sw = new StringWriter())
+            {
+                using (var writer = XmlWriter.Create(sw))
+                {
+                    xs.Serialize(writer, c1);
+                    xml1 = sw.ToString();
+                }
+            }
+
+            data.Add(new Data
+            {
+                InputType = "xml",
+                InputData = xml1
+            });
+
+            data.Add(new Data
+            {
+                InputType = "Text",
+                InputData = "Dette er en test textstreng"
+            });
+
+            data.Add(new Data
+            {
+                InputType = "ASCII",
+                InputData = "sfjkdbgfkbg"
+            });
+
+            foreach(var item in data)
+            {
+               carlist.Add(handler1.Parse(item.InputData,item.InputType));
+            }
+
+            Console.WriteLine("\n\n");
+
+            foreach (var item in carlist)
+            {
+                if(item != null)
+                Console.WriteLine(item.Owner + " " + item.Model);
+                else
+                {
+                    Console.WriteLine("Ikke korrekt object");
+                }
+            }
         }
-
     }
 }
