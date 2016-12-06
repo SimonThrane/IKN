@@ -6,15 +6,16 @@ namespace ChainOfResponsibility
     {
         public override T Parse(string inputdata, string inputtype)
         {
-            if (inputtype == "TEXT")
+            if (inputtype.ToLower() == "text")
             {
                 Console.WriteLine("This i Text: "+inputdata);
-                return NextChain.Parse(inputdata, inputtype);
+                return default(T);
 
             }
             else
             {
-                return NextChain.Parse(inputdata, inputtype);
+                Console.WriteLine("No passing succes");
+                return default(T);
             }
         }
     }
