@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ChainOfResponsibility
 {
@@ -21,7 +22,16 @@ namespace ChainOfResponsibility
 
             //Generate data.
 
+            var c = new Car();
+            c.Age = 5;
+            c.Model = "Audi";
+            c.Owner = "Casper";
+
+            List<Data> data = new List<Data>();
+
+
             
+
 
         }
 
