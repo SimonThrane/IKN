@@ -20,6 +20,7 @@ namespace ChainOfResponsibility
             handler2.SetNextChain(handler3);
 
             //Generate data.
+            List<Data> testdata= new List<Data>();
 
             
 
