@@ -35,14 +35,14 @@ namespace ChainOfResponsibility
             c.Owner = "Casper";
 
             var c1 = new Car();
-            c.Age = 3;
-            c.Model = "VW";
-            c.Owner = "Simon";
+            c1.Age = 3;
+            c1.Model = "VW";
+            c1.Owner = "Simon";
 
             var c2 = new Car();
-            c.Age = 8;
-            c.Model = "BMW";
-            c.Owner = "Lars";
+            c2.Age = 8;
+            c2.Model = "BMW";
+            c2.Owner = "Lars";
 
             string xml1;
 
@@ -99,9 +99,6 @@ namespace ChainOfResponsibility
                     Console.WriteLine("Ikke korrekt object");
                 }
             }
-
-
         }
-
     }
 }
