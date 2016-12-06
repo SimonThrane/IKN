@@ -4,4 +4,4 @@ Ved Chain-of-responsibility kontakter en klient nemlig kun en handler som så ka
 
 Et sted hvor chain-of-responsibility konceptuelt også finder sted er i exceptionhandling i fx C#. Hvis en funktion kalder en anden funktion hvor en exception opstår, og denne ikke kan håndtere denne exception bliver denne automatisk propageret op i call stacken og lader den næste funktion forsøge at håndtere det. 
 
-En ulempe ved dette pattern er at setuppet omkring det med at sætte selve kæden op kan have stor risiko for fejl. Dette vil dog med fordel kunne lægges ud en form for factory, for bl.a. at gøre designet mere testbart.
+En ulempe ved dette pattern er at setuppet omkring det med at sætte selve kæden op kan have stor risiko for fejl. Dette vil dog med fordel kunne lægges ud en form for Factory Method, for bl.a. at gøre designet mere testbart.
