@@ -1,1 +1,2 @@
 C:\Users\Lars Hjerrild\Documents\Skole\I4IKN\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.exe.config
+C:\Users\kaspe\Desktop\Skole\4-semester\IKN\Repo\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.exe.config
