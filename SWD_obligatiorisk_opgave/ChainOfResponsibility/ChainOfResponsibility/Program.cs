@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -43,32 +44,43 @@ namespace ChainOfResponsibility
 
             string xml1;
 
-            List <Data> data = new List<Data>();
-
-            data.Add(new ChainOfResponsibility.Data
+            var data = new List<Data>
             {
-                InputData = JsonConvert.SerializeObject(c),
-                InputType = "json"
-            });
+                new ChainOfResponsibility.Data
+                {
+                    InputData = JsonConvert.SerializeObject(c),
+                    InputType = "json"
+                }
+            };
+
 
             using (var sw = new StringWriter())
             {
-                using (XmlWriter writer = XmlWriter.Create(sw))
+                using (var writer = XmlWriter.Create(sw))
                 {
                     xs.Serialize(writer, c1);
-                    xml1 = sw.toString();
+                    xml1 = sw.ToString();
                 }
             }
 
-                 
-
-
-            data.Add(new ChainOfResponsibility.Data
+            data.Add(new Data
             {
-                
-                InputData = xs.Serialize()
-            })
-            
+                InputType = "xml",
+                InputData = xml1
+            });
+
+            data.Add(new Data
+            {
+                InputType = "Text",
+                InputData = "Dette er en test textstreng"
+            });
+
+            data.Add(new Data
+            {
+                InputType = "ASCII",
+                InputData = "sfjkdbgfkbg"
+            });
+
 
 
         }

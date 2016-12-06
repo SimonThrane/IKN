@@ -1,5 +1,7 @@
-<<<<<<< HEAD
 C:\Users\kaspe\Desktop\Skole\4-semester\IKN\Repo\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.exe.config
-=======
-C:\Users\Lars Hjerrild\Documents\My Documents\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.exe.config
->>>>>>> a18605109b770cd22bf28b94a2a6443770f8acc3
+C:\Users\kaspe\Desktop\Skole\4-semester\IKN\Repo\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.exe
+C:\Users\kaspe\Desktop\Skole\4-semester\IKN\Repo\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.pdb
+C:\Users\kaspe\Desktop\Skole\4-semester\IKN\Repo\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\Newtonsoft.Json.dll
+C:\Users\kaspe\Desktop\Skole\4-semester\IKN\Repo\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\Newtonsoft.Json.xml
+C:\Users\kaspe\Desktop\Skole\4-semester\IKN\Repo\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\obj\Debug\ChainOfResponsibility.exe
+C:\Users\kaspe\Desktop\Skole\4-semester\IKN\Repo\IKN\SWD_obligatiorisk_opgave\ChainOfResponsibility\ChainOfResponsibility\obj\Debug\ChainOfResponsibility.pdb
