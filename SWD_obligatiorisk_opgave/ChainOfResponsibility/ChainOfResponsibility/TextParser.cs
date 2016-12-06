@@ -1,17 +1,16 @@
 ﻿using System;
-using Newtonsoft.Json;
 
 namespace ChainOfResponsibility
 {
-    class JsonParser<T> : ChainHandler<T>
+    class TextParser<T> : ChainHandler<T>
     {
         public override T Parse(string inputdata, string inputtype)
         {
-            if (inputtype == "JSON")
+            if (inputtype == "TEXT")
             {
-                Console.WriteLine("This i JSON I am parsing this");
-                T data=JsonConvert.DeserializeObject<T>(inputdata);
-                return data;
+                Console.WriteLine("This i Text: "+inputdata);
+                return NextChain.Parse(inputdata, inputtype);
+
             }
             else
             {
