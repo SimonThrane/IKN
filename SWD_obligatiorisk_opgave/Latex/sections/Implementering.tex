@@ -1,6 +1,6 @@
 \chapter{Implementering}
 
-Til denne opgave er der blevet implementeret software mønsteret chain of responsibility. I den implementerede version kan der vælges mellem forskellige deserilizations-metoder. Det er lavet så det kan håndteres at sende xml og og json format. Dette er gjort generisk, således at det er ligegyldigt hvilket type object der skal deserilizeres. 
+Til denne opgave er der blevet implementeret et eksempel på software mønsteret chain of responsibility. I det implementerede eksempel kan der vælges mellem forskellige deserilizations-metoder. Selve implementeringen er lavet så en handler kan formatere XML og JSON format til konkrete klasser. Dette er gjort generisk, således at det er ligegyldigt hvilken type object der skal deserilizeres. 
 
 Den overordnede abstracte klasse, som skulle styre chainen ses nedenfor
 
@@ -19,7 +19,7 @@ public abstract class ChainHandler<T>
   }
 \end{lstlisting}  
 
-I forhold til beskrivelsen ses at nextChain sættes. Som det kan ses vælges den konkrete handler på baggrund af en streng, her kaldet inputtype. Det væsentlige for de nedarvede klasser er at alle chainhandlers skal implementere Parse. Metode skal så som beskrevet kalde Parse på NextChain hvis den ikke selv kan håndtere kaldet.
+I forhold til beskrivelsen ses at nextChain sættes contructoren. Som det kan ses vælges den konkrete handler på baggrund af en streng, her kaldet inputtype. Det væsentlige for de nedarvede klasser er at alle chainhandlers skal implementere metoden Parse. Metoden skal så, som beskrevet, kalde Parse på NextChain hvis den ikke selv kan håndtere kaldet.
 
 \begin{lstlisting}
   class XMLParser<T> : ChainHandler<T>
@@ -38,7 +38,7 @@ I forhold til beskrivelsen ses at nextChain sættes. Som det kan ses vælges den
     }
 \end{lstlisting} 
 
-Ovenfor ses et eksempel på en af handlerne. Som det kan ses nedarves den abstracte Chainhandler. Selve funktionen tjekker så på strengen inputtype om det er xml. Hvis inputtype er 'xml', så håndtere denne klasse kaldet, og laver objecter ud fra xml. Hvis ikke inputtypen er xml kaldes Parse på Nextchain. 
+Ovenfor ses et eksempel på en af handlerne. Som det kan ses nedarves den abstracte Chainhandler. Selve funktionen tjekker så på strengen inputtype om det er XML. Hvis inputtype er XML, så håndterer denne klasse kaldet, og laver objecter ud fra den streng kaldet inputdata, baseret på en antagelse om at det er XML format. Hvis ikke inputtypen er XML kaldes Parse på Nextchain. 
 
 \begin{lstlisting}
 //Setup Chain of Responsibility
@@ -50,6 +50,6 @@ Ovenfor ses et eksempel på en af handlerne. Som det kan ses nedarves den abstra
             handler2.SetNextChain(handler3);
 \end{lstlisting} 
    
-Som det ses ovenfor sættes chainen op i programmet. 
+Som det ses ovenfor sættes chainen op i programmet, hvorefter første led i kæden bliver benyttet hvis man skal være sikker på at alle led i kæden bliver travaseret. 
 
 
