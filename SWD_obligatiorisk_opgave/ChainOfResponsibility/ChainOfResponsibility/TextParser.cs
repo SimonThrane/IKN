@@ -8,7 +8,7 @@ namespace ChainOfResponsibility
         {
             if (inputtype.ToLower() == "text")
             {
-                Console.WriteLine("This i Text: "+inputdata);
+                Console.WriteLine("This is Text: "+inputdata);
                 return default(T);
 
             }

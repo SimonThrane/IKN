@@ -9,7 +9,7 @@ namespace ChainOfResponsibility
         {
             if (inputtype.ToLower() == "json")
             {
-                Console.WriteLine("This i JSON I am parsing this");
+                Console.WriteLine("This is JSON, I am parsing this");
                 T data= JsonConvert.DeserializeObject<T>(inputdata);
                 return data;
             }
