@@ -1,5 +1,5 @@
 \chapter{Diskussion}
-Chain of reponsibility er et pattern der fokuserer meget på at fjerne koblingen mellem en klient og en modtager. På dette punkt kan man sammenligne det med Mediator Pattern \footnote{https://en.wikipedia.org/wiki/Mediator_pattern}, hvor man uddelegerer ansvaret til en central instans som så selv finder ud hvordan en bestemt besked håndteres.
+Chain of reponsibility er et pattern der fokuserer meget på at fjerne koblingen mellem en klient og en modtager. På dette punkt kan man sammenligne det med Mediator Pattern \footnote{https://en.wikipedia.org/wiki/Mediator\_pattern}, hvor man uddelegerer ansvaret til en central instans som så selv finder ud hvordan en bestemt besked håndteres.
 Ved Chain of responsibility kontakter en klient nemlig kun en handler, som så kan uddelegere arbejdet alt efter hvem der kan/skal håndtere forespørgslen. \\
 
 \noindent Et sted hvor chain of responsibility konceptuelt også bliver brugt er i exceptionhandling i f.eks. C\#. Hvis en funktion kalder en anden funktion, hvor en exception opstår, og denne ikke kan håndtere exceptionen, bliver exceptionen automatisk propageret op i call stacken og lader den næste funktion forsøge at håndtere den. \\
