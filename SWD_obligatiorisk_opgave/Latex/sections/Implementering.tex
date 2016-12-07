@@ -1,1 +1,52 @@
 \chapter{Implementering}
+
+Til denne opgave er der blevet implementeret chain of responsibility, således at der kan vælges mellem forskellige deserilizationsmetoder. Der er lavet så det kan håndteres at sende xml og og json format. Dette er gjort generisk, således at det er ligegyldigt hvilket type object der skal deserilizeres. 
+
+Den overordnede abstracte klasse, som skulle styre chainen ses nedenfor
+
+\begin{lstlisting}
+public abstract class ChainHandler<T>
+  {
+     public ChainHandler<T> NextChain { get; set; }
+
+     public void SetNextChain(ChainHandler<T> nextChain)
+     {
+         NextChain = nextChain;
+     }
+
+     public abstract T Parse(string inputdata, string inputtype);
+
+  }
+\end{lstlisting}}    
+
+I forhold til beskrivelsen kan man se at der sættes en nextChain, og at det er en generic. I det er valgt at der udvælges handler på baggrund af en streng til inputtype. Dette kunne evt være anderledes. Det væsentlige her er at alle chainhandlers skal implementere Parse, og at denne metode skal så som beskrevet kalde Parse på NextChain hvis den ikke selv kan håndtere kaldet.
+
+\begin{lstlisting}
+  class XMLParser<T> : ChainHandler<T>
+    {
+        public override T Parse(string inputdata, string inputtype)
+        {
+            if (inputtype.ToLower() == "xml")
+            {
+                Console.WriteLine("This is xml, I am parsing this");
+                var serializer = new XmlSerializer(typeof(T));
+                var type = (T) serializer.Deserialize(new StringReader(inputdata));
+                return type;
+            }
+            return NextChain.Parse(inputdata, inputtype);
+        }
+    }
+\end{lstlisting}}  
+
+Ovenfor ses et eksempel på en af handlerne. Som det kan ses nedarves den abstracte Chainhandler. Selve funktionen tjekker så på inputtypen om det er xml. Hvis det er det, så håndtere denne klasse strengen, og kaldes Nextchain blot istedet. 
+
+\begin{lstlisting}
+//Setup Chain of Responsibility
+            ChainHandler<Car> handler1=new JsonParser<Car>();
+            ChainHandler<Car> handler2 = new XMLParser<Car>();
+            ChainHandler<Car> handler3 = new TextParser<Car>();
+
+            handler1.SetNextChain(handler2);
+            handler2.SetNextChain(handler3);
+\end{lstlisting}} 
+   
