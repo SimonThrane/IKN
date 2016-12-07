@@ -1,6 +1,6 @@
 \chapter{Implementering}
 
-Til denne opgave er der blevet implementeret chain of responsibility, således at der kan vælges mellem forskellige deserilizationsmetoder. Der er lavet så det kan håndteres at sende xml og og json format. Dette er gjort generisk, således at det er ligegyldigt hvilket type object der skal deserilizeres. 
+Til denne opgave er der blevet implementeret software mønsteret chain of responsibility. I den implementerede version kan der vælges mellem forskellige deserilizations-metoder. Det er lavet så det kan håndteres at sende xml og og json format. Dette er gjort generisk, således at det er ligegyldigt hvilket type object der skal deserilizeres. 
 
 Den overordnede abstracte klasse, som skulle styre chainen ses nedenfor
 
@@ -17,9 +17,9 @@ public abstract class ChainHandler<T>
      public abstract T Parse(string inputdata, string inputtype);
 
   }
-\end{lstlisting}    
+\end{lstlisting}}    
 
-I forhold til beskrivelsen kan man se at der sættes en nextChain, og at det er en generic. I det er valgt at der udvælges handler på baggrund af en streng til inputtype. Dette kunne evt være anderledes. Det væsentlige her er at alle chainhandlers skal implementere Parse, og at denne metode skal så som beskrevet kalde Parse på NextChain hvis den ikke selv kan håndtere kaldet.
+I forhold til beskrivelsen ses at nextChain sættes. Som det kan ses vælges den konkrete handler på baggrund af en streng, her kaldet inputtype. Det væsentlige for de nedarvede klasser er at alle chainhandlers skal implementere Parse. Metode skal så som beskrevet kalde Parse på NextChain hvis den ikke selv kan håndtere kaldet.
 
 \begin{lstlisting}
   class XMLParser<T> : ChainHandler<T>
@@ -36,17 +36,20 @@ I forhold til beskrivelsen kan man se at der sættes en nextChain, og at det er 
             return NextChain.Parse(inputdata, inputtype);
         }
     }
-\end{lstlisting}  
+\end{lstlisting}}  
 
-Ovenfor ses et eksempel på en af handlerne. Som det kan ses nedarves den abstracte Chainhandler. Selve funktionen tjekker så på inputtypen om det er xml. Hvis det er det, så håndtere denne klasse strengen, og kaldes Nextchain blot istedet. 
+Ovenfor ses et eksempel på en af handlerne. Som det kan ses nedarves den abstracte Chainhandler. Selve funktionen tjekker så på strengen inputtype om det er xml. Hvis inputtype er 'xml', så håndtere denne klasse kaldet, og laver objecter ud fra xml. Hvis ikke inputtypen er xml kaldes Parse på Nextchain. 
 
 \begin{lstlisting}
 //Setup Chain of Responsibility
-            ChainHandler<Car> handler1=new JsonParser<Car>();
+            ChainHandler<Car> handler1 = new JsonParser<Car>();
             ChainHandler<Car> handler2 = new XMLParser<Car>();
             ChainHandler<Car> handler3 = new TextParser<Car>();
 
             handler1.SetNextChain(handler2);
             handler2.SetNextChain(handler3);
-\end{lstlisting}
+\end{lstlisting}} 
    
+Som det ses ovenfor sættes chainen op i programmet. 
+
+
