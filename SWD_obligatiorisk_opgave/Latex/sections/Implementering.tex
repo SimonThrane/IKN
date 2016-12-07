@@ -38,7 +38,7 @@ I forhold til beskrivelsen ses at nextChain sættes contructoren. Som det kan se
     }
 \end{lstlisting} 
 
-Ovenfor ses et eksempel på en af handlerne. Som det kan ses nedarves den abstracte Chainhandler. Selve funktionen tjekker på strengen inputtype om det er XML. Hvis inputtype er XML, så håndterer denne klasse kaldet, og laver objecter ud fra den streng kaldet inputdata, baseret på en antagelse om at det er XML format. Hvis ikke inputtypen er XML kaldes Parse på Nextchain. Klassen håndtere ikke hvis inputtypen ikke faktisk er XML. 
+\noindent Ovenfor ses et eksempel på en af handlerne. Som det kan ses nedarves den abstracte Chainhandler. Selve funktionen tjekker på strengen inputtype om det er XML. Hvis inputtype er XML, så håndterer denne klasse kaldet, og laver objecter ud fra den streng kaldet inputdata, baseret på en antagelse om at det er XML format. Hvis ikke inputtypen er XML kaldes Parse på Nextchain. Klassen håndtere ikke hvis inputtypen ikke faktisk er XML. 
 
 \begin{lstlisting}
 //Setup Chain of Responsibility
@@ -50,6 +50,19 @@ Ovenfor ses et eksempel på en af handlerne. Som det kan ses nedarves den abstra
             handler2.SetNextChain(handler3);
 \end{lstlisting} 
    
-Som det ses ovenfor skal chainen sættes manuelt op i clienten. Handler 1 skal således kaldes for at være sikker på at alle led i kæden bliver travaseret. 
+\noindent Som det ses ovenfor skal chainen sættes manuelt op i clienten. Handler 1 skal således kaldes for at være sikker på at alle led i kæden bliver travaseret. 
+
+\noindent Det fulde klassediagram, ses på figur \ref{fig:KonkretKlassediagram}. Det kan ses det ligner den gennerelle beskrivelse meget.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics
+	[width=140mm]{figures/KonkretUML.pdf}
+	\caption{Klassediagram for implementering af Chain of Responsibility}
+	\label{fig:KonkretKlassediagram}
+\end{figure} 
+
+
+
 
 
