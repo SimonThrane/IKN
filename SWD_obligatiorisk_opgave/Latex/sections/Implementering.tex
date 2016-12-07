@@ -17,7 +17,7 @@ public abstract class ChainHandler<T>
      public abstract T Parse(string inputdata, string inputtype);
 
   }
-\end{lstlisting}}    
+\end{lstlisting}  
 
 I forhold til beskrivelsen ses at nextChain sættes. Som det kan ses vælges den konkrete handler på baggrund af en streng, her kaldet inputtype. Det væsentlige for de nedarvede klasser er at alle chainhandlers skal implementere Parse. Metode skal så som beskrevet kalde Parse på NextChain hvis den ikke selv kan håndtere kaldet.
 
@@ -36,7 +36,7 @@ I forhold til beskrivelsen ses at nextChain sættes. Som det kan ses vælges den
             return NextChain.Parse(inputdata, inputtype);
         }
     }
-\end{lstlisting}}  
+\end{lstlisting} 
 
 Ovenfor ses et eksempel på en af handlerne. Som det kan ses nedarves den abstracte Chainhandler. Selve funktionen tjekker så på strengen inputtype om det er xml. Hvis inputtype er 'xml', så håndtere denne klasse kaldet, og laver objecter ud fra xml. Hvis ikke inputtypen er xml kaldes Parse på Nextchain. 
 
@@ -48,7 +48,7 @@ Ovenfor ses et eksempel på en af handlerne. Som det kan ses nedarves den abstra
 
             handler1.SetNextChain(handler2);
             handler2.SetNextChain(handler3);
-\end{lstlisting}} 
+\end{lstlisting} 
    
 Som det ses ovenfor sættes chainen op i programmet. 
 
